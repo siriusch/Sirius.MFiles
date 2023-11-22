@@ -16,6 +16,8 @@ using Sirius.MFiles.VafUtil.Options;
 
 namespace Sirius.MFiles.VafUtil.Verbs {
 	internal class GenerateVerb {
+		private static readonly Regex rxNamespaceDetect = new Regex(@"^(//[^\r\n]+|/\*((?!\*/).)*\*/|[^{])*\bnamespace\s+(?<ns>[\p{L}_][\p{L}0-9_]*(\s*\.\s*[\p{L}_][\p{L}0-9_]*)*)\b\s*\{", RegexOptions.ExplicitCapture|RegexOptions.CultureInvariant);
+
 		private class Extension: IDisposable {
 			private readonly Dictionary<string, string> aliasToName = new Dictionary<string, string>(StringComparer.InvariantCulture);
 			private readonly Dictionary<string, string> nameToAlias = new Dictionary<string, string>(StringComparer.InvariantCulture);
@@ -83,15 +85,30 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 				transform.Load(reader);
 			}
 			using (var extension = new Extension()) {
-				var args = new XsltArgumentList();
-				args.AddExtensionObject("urn:VafUtil", extension);
-				args.AddParam("kind", "", opts.Kind.ToString());
-				args.AddParam("namespace", "", opts.Namespace);
-				args.AddParam("views", "", opts.Views);
-				args.XsltMessageEncountered += (_, a) => Console.WriteLine(a.Message);
-				var structureXml = XDocument.Load(Path.Combine(opts.ConfigFolder, @"Metadata\Structure.xml"));
-				using (var output = File.CreateText(opts.Output)) {
-					transform.Transform(structureXml.CreateNavigator(), args, output);
+				using (var output = File.Open(opts.Output, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read)) {
+					if (string.IsNullOrEmpty(opts.Namespace)) {
+						using (var reader = new StreamReader(output, Encoding.UTF8, true, 1024, true)) {
+							var match = rxNamespaceDetect.Match(reader.ReadToEnd());
+							if (match.Success) {
+								opts.Namespace = match.Groups["ns"].Value;
+								Console.WriteLine("Detected namespace "+opts.Namespace);
+							} else {
+								throw new InvalidOperationException("No namespace detected, please specify explicitly");
+							}
+						}
+						output.Seek(0, SeekOrigin.Begin);
+					}
+					var args = new XsltArgumentList();
+					args.AddExtensionObject("urn:VafUtil", extension);
+					args.AddParam("kind", "", opts.Kind.ToString());
+					args.AddParam("namespace", "", opts.Namespace);
+					args.AddParam("views", "", opts.Views);
+					args.XsltMessageEncountered += (_, a) => Console.WriteLine(a.Message);
+					var structureXml = XDocument.Load(Path.Combine(opts.ConfigFolder, @"Metadata\Structure.xml"));
+					using (var writer = new StreamWriter(output, Encoding.UTF8, 1024, true)) {
+						transform.Transform(structureXml.CreateNavigator(), args, writer);
+					}
+					output.SetLength(output.Length);
 				}
 			}
 		}
