@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -14,12 +16,17 @@ using Sirius.MFiles.VafUtil.Options;
 
 namespace Sirius.MFiles.VafUtil.Verbs {
 	internal class GenerateVerb {
-		private class Extension {
+		private class Extension: IDisposable {
 			private readonly Dictionary<string, string> aliasToName = new Dictionary<string, string>(StringComparer.InvariantCulture);
 			private readonly Dictionary<string, string> nameToAlias = new Dictionary<string, string>(StringComparer.InvariantCulture);
 
 			private static readonly Regex rxAliasToName = new Regex(@"^\p{Lu}{2,}|\p{L}(\p{Ll}|[0-9_])*", RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.ExplicitCapture);
 			private static readonly Regex rxMarks = new Regex(@"\p{M}+", RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.ExplicitCapture);
+			private readonly CodeDomProvider codeDomProvider;
+
+			public Extension() {
+				codeDomProvider = CodeDomProvider.CreateProvider("CSharp");
+			}
 
 			public string NormalizeName(string alias) {
 				if (aliasToName.TryGetValue(alias, out var name)) {
@@ -52,6 +59,19 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 				nameToAlias.Add(name, alias);
 				return name;
 			}
+
+			public string CSharpString(string name, int depth) {
+				using (var writer = new StringWriter()) {
+					codeDomProvider.GenerateCodeFromExpression(new CodePrimitiveExpression(name), writer, new CodeGeneratorOptions {
+							IndentString = new string('\t', depth)
+					});
+					return writer.ToString();
+				}
+			}
+
+			void IDisposable.Dispose() {
+				codeDomProvider.Dispose();
+			}
 		}
 
 		public static void Execute(GenerateOptions opts) {
@@ -62,14 +82,17 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 			       })) {
 				transform.Load(reader);
 			}
-			var args = new XsltArgumentList();
-			args.AddExtensionObject("urn:VafUtil", new Extension());
-			args.AddParam("kind", "", opts.Kind.ToString());
-			args.AddParam("namespace", "", opts.Namespace);
-			args.XsltMessageEncountered += (_, a) => Console.WriteLine(a.Message);
-			var structureXml = XDocument.Load(Path.Combine(opts.ConfigFolder, @"Metadata\Structure.xml"));
-			using (var output = File.CreateText(opts.Output)) {
-				transform.Transform(structureXml.CreateNavigator(), args, output);
+			using (var extension = new Extension()) {
+				var args = new XsltArgumentList();
+				args.AddExtensionObject("urn:VafUtil", extension);
+				args.AddParam("kind", "", opts.Kind.ToString());
+				args.AddParam("namespace", "", opts.Namespace);
+				args.AddParam("views", "", opts.Views);
+				args.XsltMessageEncountered += (_, a) => Console.WriteLine(a.Message);
+				var structureXml = XDocument.Load(Path.Combine(opts.ConfigFolder, @"Metadata\Structure.xml"));
+				using (var output = File.CreateText(opts.Output)) {
+					transform.Transform(structureXml.CreateNavigator(), args, output);
+				}
 			}
 		}
 	}

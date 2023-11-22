@@ -7,13 +7,9 @@
 
 	<xsl:param name="kind" />
 	<xsl:param name="namespace" />
+	<xsl:param name="views" />
 
 	<xsl:key name="objtype" match="/structure/objtypes/objtype" use="number(@id)" />
-
-	<xsl:template name="AliasName">
-		<xsl:param name="alias" />
-		<xsl:value-of select="vafutil:NormalizeName($alias)" />
-	</xsl:template>
 
 	<xsl:template name="AliasFile">
 		<xsl:text xml:space="preserve">using System;
@@ -22,7 +18,7 @@ namespace </xsl:text>
 		<xsl:value-of select="$namespace" />
 		<xsl:text xml:space="preserve"> {
 	public static class Alias {</xsl:text>
-		<xsl:apply-templates select="//*[@aliases and not(@deleted='true')]" mode="AliasFile">
+		<xsl:apply-templates select="*/*[normalize-space(@aliases) and not(@deleted='true') and (not(self::view) or $views)]" mode="AliasFile">
 			<xsl:sort select="count(parent::*/following-sibling::*)" data-type="number" order="descending" />
 			<xsl:sort select="@aliases" />
 		</xsl:apply-templates>
@@ -31,20 +27,26 @@ namespace </xsl:text>
 	</xsl:template>
 
 	<xsl:template match="*" mode="AliasFile">
-		<xsl:param name="aliases" select="concat(normalize-space(@aliases), ' ')" />
-		<xsl:variable name="alias" select="substring-before($aliases, ' ')" />
-		<xsl:if test="$alias">
+		<xsl:param name="aliases" select="concat(normalize-space(@aliases), ';')" />
+		<xsl:variable name="rawalias" select="substring-before($aliases, ';')"/>
+		<xsl:variable name="alias">
+			<xsl:if test="$rawalias">
+				<xsl:if test="self::view">
+					<xsl:text>VW.</xsl:text>
+				</xsl:if>
+				<xsl:value-of select="$rawalias"/>
+			</xsl:if>
+		</xsl:variable>
+		<xsl:if test="$alias!=''">
 			<xsl:text xml:space="preserve">
 		public const string </xsl:text>
-			<xsl:call-template name="AliasName">
-				<xsl:with-param name="alias" select="$alias" />
-			</xsl:call-template>
-			<xsl:text xml:space="preserve"> = "</xsl:text>
-			<xsl:value-of select="$alias" />
-			<xsl:text xml:space="preserve">";
+			<xsl:value-of select="vafutil:NormalizeName($alias)" />
+			<xsl:text xml:space="preserve"> = </xsl:text>
+			<xsl:value-of select="vafutil:CSharpString($rawalias, 4)" />
+			<xsl:text xml:space="preserve">;
 </xsl:text>
 		</xsl:if>
-		<xsl:variable name="rest" select="substring-after($alias, ' ')" />
+		<xsl:variable name="rest" select="substring-after($aliases, ';')" />
 		<xsl:if test="$rest">
 			<xsl:apply-templates mode="AliasFile">
 				<xsl:with-param name="aliases" select="$rest" />
@@ -64,9 +66,7 @@ namespace </xsl:text>
 		<xsl:value-of select="$namespace" />
 		<xsl:text xml:space="preserve"> {
 	public partial class Configuration {</xsl:text>
-		<xsl:apply-templates
-			select="//*[(@aliases and not(@deleted='true')) or (self::propertydef/datatype/Lookup/@isowner='true')]"
-			mode="ConfigurationFile">
+		<xsl:apply-templates select="*/*[(normalize-space(@aliases) or self::propertydef/datatype/Lookup/@isowner='true') and not(@deleted='true') and (not(self::view) or $views)]" mode="ConfigurationFile">
 			<xsl:sort select="count(parent::*/following-sibling::*)" data-type="number" order="descending" />
 			<xsl:sort
 				select="normalize-space(concat(@aliases, ' PD.Owner', self::propertydef/datatype/Lookup[@isowner='true']/@name))" />
@@ -83,13 +83,9 @@ namespace </xsl:text>
 			<xsl:if test="normalize-space($objtype/@aliases)">
 				<xsl:text xml:space="preserve">
 			</xsl:text>
-				<xsl:call-template name="AliasName">
-					<xsl:with-param name="alias">PD.Owner.<xsl:value-of select="datatype/Lookup/@name" /></xsl:with-param>
-				</xsl:call-template>
+				<xsl:value-of select="vafutil:NormalizeName(concat('PD.Owner.', datatype/Lookup/@name))" />
 				<xsl:text xml:space="preserve">.Set(objectTypeOwners[</xsl:text>
-				<xsl:call-template name="AliasName">
-					<xsl:with-param name="alias" select="substring-before(concat($objtype/@aliases, ' '), ' ')" />
-				</xsl:call-template>
+				<xsl:value-of select="vafutil:NormalizeName(substring-before(concat($objtype/@aliases, ';'), ';'))" />
 				<xsl:text xml:space="preserve">]);</xsl:text>
 			</xsl:if>
 		</xsl:for-each>
@@ -106,18 +102,24 @@ namespace </xsl:text>
 			<xsl:text xml:space="preserve">
 		[MFPropertyDef(Datatypes = new[] { MFDataType.MFDatatypeLookup }, AllowEmpty = true)]
 		public readonly MFIdentifier </xsl:text>
-			<xsl:call-template name="AliasName">
-				<xsl:with-param name="alias">PD.Owner.<xsl:value-of select="datatype/Lookup/@name" /></xsl:with-param>
-			</xsl:call-template>
+			<xsl:value-of select="vafutil:NormalizeName(concat('PD.Owner.', datatype/Lookup/@name))" />
 			<xsl:text xml:space="preserve"> = new MFIdentifier();
 </xsl:text>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="*" mode="ConfigurationFile">
-		<xsl:param name="aliases" select="concat(normalize-space(@aliases), ' ')" />
-		<xsl:variable name="alias" select="substring-before($aliases, ' ')" />
-		<xsl:if test="$alias">
+		<xsl:param name="aliases" select="concat(normalize-space(@aliases), ';')" />
+		<xsl:variable name="alias">
+			<xsl:if test="substring-before($aliases, ';')">
+				<xsl:if test="self::view">
+					<xsl:text>VW.</xsl:text>
+				</xsl:if>
+				<xsl:value-of select="substring-before($aliases, ';')"/>
+			</xsl:if>
+		</xsl:variable>
+		<xsl:if test="$alias!=''">
+			<xsl:message><xsl:value-of select="$alias"/></xsl:message>
 			<xsl:text xml:space="preserve">
 		[</xsl:text>
 			<xsl:choose>
@@ -170,9 +172,7 @@ namespace </xsl:text>
 							<xsl:when test="objecttype/@otid=21">MFBuiltInObjectType.MFBuiltInObjectTypeEmailConversation</xsl:when>
 							<xsl:when test="$objtype[normalize-space(@aliases)]">
 								<xsl:text>Alias.</xsl:text>
-								<xsl:call-template name="AliasName">
-									<xsl:with-param name="alias" select="substring-before(concat($objtype/@aliases, ' '), ' ')" />
-								</xsl:call-template>
+								<xsl:value-of select="vafutil:NormalizeName(substring-before(concat($objtype/@aliases, ';'), ';'))" />
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:text>"</xsl:text>
@@ -188,7 +188,7 @@ namespace </xsl:text>
 				<xsl:when test="self::transition">
 					<xsl:text>MFStateTransition</xsl:text>
 				</xsl:when>
-				<xsl:when test="self::usergroup">
+				<xsl:when test="self::group">
 					<xsl:text>MFUserGroup</xsl:text>
 				</xsl:when>
 				<xsl:when test="self::valuelist">
@@ -200,23 +200,22 @@ namespace </xsl:text>
 				<xsl:when test="self::state | self::state.2">
 					<xsl:text>MFState</xsl:text>
 				</xsl:when>
+				<xsl:when test="self::view">
+					<xsl:text>MFView</xsl:text>
+				</xsl:when>
 				<xsl:otherwise>
 					<xsl:message terminate="yes">Unknown item type '<xsl:value-of select="local-name(.)" />'</xsl:message>
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:text xml:space="preserve">]
 		public readonly MFIdentifier </xsl:text>
-			<xsl:call-template name="AliasName">
-				<xsl:with-param name="alias" select="$alias" />
-			</xsl:call-template>
+			<xsl:value-of select="vafutil:NormalizeName($alias)" />
 			<xsl:text xml:space="preserve"> = Alias.</xsl:text>
-			<xsl:call-template name="AliasName">
-				<xsl:with-param name="alias" select="$alias" />
-			</xsl:call-template>
+			<xsl:value-of select="vafutil:NormalizeName($alias)" />
 			<xsl:text xml:space="preserve">;
 </xsl:text>
 		</xsl:if>
-		<xsl:variable name="rest" select="substring-after($alias, ' ')" />
+		<xsl:variable name="rest" select="substring-after($aliases, ';')" />
 		<xsl:if test="$rest">
 			<xsl:apply-templates mode="ConfigurationFile">
 				<xsl:with-param name="aliases" select="$rest" />

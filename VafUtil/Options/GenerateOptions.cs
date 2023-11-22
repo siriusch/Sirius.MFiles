@@ -33,5 +33,11 @@ namespace Sirius.MFiles.VafUtil.Options {
 			get;
 			set;
 		}
+
+		[Option('v', "views", HelpText = "Also generate code for views.", Default = false)]
+		public bool Views {
+			get;
+			set;
+		}
 	}
 }
