@@ -10,13 +10,37 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
-using CommandLine;
-
 using Sirius.MFiles.VafUtil.Options;
 
 namespace Sirius.MFiles.VafUtil.Verbs {
 	internal class GenerateVerb {
 		private static readonly Regex rxNamespaceDetect = new Regex(@"^(//[^\r\n]+|/\*((?!\*/).)*\*/|[^{])*\bnamespace\s+(?<ns>[\p{L}_][\p{L}0-9_]*(\s*\.\s*[\p{L}_][\p{L}0-9_]*)*)\b\s*\{", RegexOptions.ExplicitCapture|RegexOptions.CultureInvariant);
+
+		private static XslCompiledTransform LoadEmbeddedTransform(string name) {
+			var transform = new XslCompiledTransform();
+			using (var reader = XmlReader.Create(typeof(GenerateVerb).Assembly.GetManifestResourceStream(typeof(GenerateVerb), name) ?? throw new InvalidOperationException(), new XmlReaderSettings() {
+					       XmlResolver = null,
+					       DtdProcessing = DtdProcessing.Ignore
+			       })) {
+				transform.Load(reader);
+			}
+			return transform;
+		}
+
+		private static void DetectNamespace(GenerateOptions opts, FileStream source) {
+			if (string.IsNullOrEmpty(opts.Namespace)) {
+				using (var reader = new StreamReader(source, Encoding.UTF8, true, 1024, true)) {
+					var match = rxNamespaceDetect.Match(reader.ReadToEnd());
+					if (match.Success) {
+						opts.Namespace = match.Groups["ns"].Value;
+						Console.WriteLine("Detected namespace "+opts.Namespace);
+					} else {
+						throw new InvalidOperationException("No namespace detected, please specify explicitly");
+					}
+				}
+				source.Seek(0, SeekOrigin.Begin);
+			}
+		}
 
 		private class Extension: IDisposable {
 			private readonly Dictionary<string, string> aliasToName = new Dictionary<string, string>(StringComparer.InvariantCulture);
@@ -77,39 +101,21 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 		}
 
 		public static void Execute(GenerateOptions opts) {
-			var transform = new XslCompiledTransform();
-			using (var reader = XmlReader.Create(typeof(GenerateVerb).Assembly.GetManifestResourceStream(typeof(GenerateVerb), "StructureToCs.xslt") ?? throw new InvalidOperationException(), new XmlReaderSettings() {
-					       XmlResolver = null,
-					       DtdProcessing = DtdProcessing.Ignore
-			       })) {
-				transform.Load(reader);
-			}
-			using (var extension = new Extension()) {
-				using (var output = File.Open(opts.Output, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read)) {
-					if (string.IsNullOrEmpty(opts.Namespace)) {
-						using (var reader = new StreamReader(output, Encoding.UTF8, true, 1024, true)) {
-							var match = rxNamespaceDetect.Match(reader.ReadToEnd());
-							if (match.Success) {
-								opts.Namespace = match.Groups["ns"].Value;
-								Console.WriteLine("Detected namespace "+opts.Namespace);
-							} else {
-								throw new InvalidOperationException("No namespace detected, please specify explicitly");
-							}
-						}
-						output.Seek(0, SeekOrigin.Begin);
-					}
+			var structureXml = XDocument.Load(Path.Combine(opts.ConfigFolder, @"Metadata\Structure.xml"));
+			using (var output = File.Open(opts.Output, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read)) {
+				DetectNamespace(opts, output);
+				using (var extension = new Extension()) {
 					var args = new XsltArgumentList();
 					args.AddExtensionObject("urn:VafUtil", extension);
 					args.AddParam("kind", "", opts.Kind.ToString());
 					args.AddParam("namespace", "", opts.Namespace);
 					args.AddParam("views", "", opts.Views);
 					args.XsltMessageEncountered += (_, a) => Console.WriteLine(a.Message);
-					var structureXml = XDocument.Load(Path.Combine(opts.ConfigFolder, @"Metadata\Structure.xml"));
 					using (var writer = new StreamWriter(output, Encoding.UTF8, 1024, true)) {
-						transform.Transform(structureXml.CreateNavigator(), args, writer);
+						LoadEmbeddedTransform("StructureToCs.xslt").Transform(structureXml.CreateNavigator(), args, writer);
 					}
-					output.SetLength(output.Length);
 				}
+				output.SetLength(output.Length);
 			}
 		}
 	}

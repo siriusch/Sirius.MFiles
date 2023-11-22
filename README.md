@@ -27,7 +27,7 @@ contains correctly attributed `MFIdentifier` readonly fields for all aliases in 
 the aliases, it also generates identifiers for owner properties, along with the [code required to initialize these](https://community.m-files.com/groups-1602070992/developers/f/developer-forum/8544/automatic-mfidentifier-resolution-for-owner-propertydef/25022#25022). 
 
 ```cs
-// Initialize owner property definitioins in configuration by using VaultApplication class
+// Initialize owner property definitions in configuration by using VaultApplication class
 public partial class VaultApplication: ConfigurableVaultApplicationBase<Configuration> {
   protected override void InitializeImpl(Vault vaultSrc) {
     base.InitializeImpl(vaultSrc);
