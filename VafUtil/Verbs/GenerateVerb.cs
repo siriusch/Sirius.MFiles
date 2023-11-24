@@ -43,17 +43,18 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 		}
 
 		private class Extension: IDisposable {
-			private readonly Dictionary<string, string> aliasToName = new Dictionary<string, string>(StringComparer.InvariantCulture);
-			private readonly Dictionary<string, string> nameToAlias = new Dictionary<string, string>(StringComparer.InvariantCulture);
-
 			private static readonly Regex rxAliasToName = new Regex(@"^\p{Lu}{2,}|\p{L}(\p{Ll}|[0-9_])*", RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.ExplicitCapture);
 			private static readonly Regex rxMarks = new Regex(@"\p{M}+", RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.ExplicitCapture);
+
+			private readonly Dictionary<string, string> aliasToName = new Dictionary<string, string>(StringComparer.InvariantCulture);
+			private readonly Dictionary<string, string> nameToAlias = new Dictionary<string, string>(StringComparer.InvariantCulture);
 			private readonly CodeDomProvider codeDomProvider;
 
 			public Extension() {
 				codeDomProvider = CodeDomProvider.CreateProvider("CSharp");
 			}
 
+			// ReSharper disable once UnusedMember.Local
 			public string NormalizeName(string alias) {
 				if (aliasToName.TryGetValue(alias, out var name)) {
 					return name;
@@ -86,6 +87,7 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 				return name;
 			}
 
+			// ReSharper disable once UnusedMember.Local
 			public string CSharpString(string name, int depth) {
 				using (var writer = new StringWriter()) {
 					codeDomProvider.GenerateCodeFromExpression(new CodePrimitiveExpression(name), writer, new CodeGeneratorOptions {
@@ -110,6 +112,7 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 					args.AddParam("kind", "", opts.Kind.ToString());
 					args.AddParam("namespace", "", opts.Namespace);
 					args.AddParam("views", "", opts.Views);
+					args.AddParam("verbose", "", opts.Verbose);
 					args.XsltMessageEncountered += (_, a) => Console.WriteLine(a.Message);
 					using (var writer = new StreamWriter(output, Encoding.UTF8, 1024, true)) {
 						LoadEmbeddedTransform("StructureToCs.xslt").Transform(structureXml.CreateNavigator(), args, writer);

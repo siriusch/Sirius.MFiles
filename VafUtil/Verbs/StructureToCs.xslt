@@ -8,6 +8,7 @@
 	<xsl:param name="kind" />
 	<xsl:param name="namespace" />
 	<xsl:param name="views" />
+	<xsl:param name="verbose" />
 	<xsl:param name="aliasclass">Alias</xsl:param>
 	<xsl:param name="configurationclass">Configuration</xsl:param>
 	<xsl:param name="viewprefix">VW.</xsl:param>
@@ -44,7 +45,9 @@ namespace </xsl:text>
 			</xsl:if>
 		</xsl:variable>
 		<xsl:if test="$alias!=''">
-			<xsl:message xml:space="preserve">Alias for <xsl:value-of select="substring-before(concat(local-name(.), '.'), '.')"/> <xsl:value-of select="$alias"/></xsl:message>
+			<xsl:if test="$verbose">
+				<xsl:message xml:space="preserve">Alias for <xsl:value-of select="substring-before(concat(local-name(.), '.'), '.')"/> <xsl:value-of select="$alias"/></xsl:message>
+			</xsl:if>
 			<xsl:text xml:space="preserve">
 		public const string </xsl:text>
 			<xsl:value-of select="vafutil:NormalizeName($alias)" />
@@ -127,7 +130,9 @@ namespace </xsl:text>
 			</xsl:if>
 		</xsl:variable>
 		<xsl:if test="$alias!=''">
-			<xsl:message xml:space="preserve">MFIdentifier for <xsl:value-of select="substring-before(concat(local-name(.), '.'), '.')"/> <xsl:value-of select="$alias"/></xsl:message>
+			<xsl:if test="$verbose">
+				<xsl:message xml:space="preserve">MFIdentifier for <xsl:value-of select="substring-before(concat(local-name(.), '.'), '.')"/> <xsl:value-of select="$alias"/></xsl:message>
+			</xsl:if>
 			<xsl:text xml:space="preserve">
 		[</xsl:text>
 			<xsl:choose>

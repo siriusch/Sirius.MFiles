@@ -34,8 +34,14 @@ namespace Sirius.MFiles.VafUtil.Options {
 			set;
 		}
 
-		[Option('v', "views", HelpText = "Also generate code for views.", Default = false)]
+		[Option("views", HelpText = "Also generate code for views.", Default = false)]
 		public bool Views {
+			get;
+			set;
+		}
+
+		[Option("verbose", HelpText = "Verbose output.", Default = false)]
+		public bool Verbose {
 			get;
 			set;
 		}
