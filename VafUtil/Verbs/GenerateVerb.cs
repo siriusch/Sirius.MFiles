@@ -118,7 +118,7 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 						LoadEmbeddedTransform("StructureToCs.xslt").Transform(structureXml.CreateNavigator(), args, writer);
 					}
 				}
-				output.SetLength(output.Length);
+				output.SetLength(output.Position);
 			}
 		}
 	}
