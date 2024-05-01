@@ -1,0 +1,68 @@
+﻿<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PhoneInvalidCountryCode" xml:space="preserve">
+    <value>Le numéro à un code pays invalide.</value>
+  </data>
+  <data name="PhoneInvalidFormat" xml:space="preserve">
+    <value>Le numéro est invalide ({message}).</value>
+  </data>
+  <data name="PhoneInvalidLength" xml:space="preserve">
+    <value>Le numéro à une longueur invalide.</value>
+  </data>
+  <data name="PhoneInvalidNumber" xml:space="preserve">
+    <value>Le numéro n'est pas correct.</value>
+  </data>
+  <data name="PhoneLocalNumber" xml:space="preserve">
+    <value>Le numéro ne contient pas d'indicatif.</value>
+  </data>
+  <data name="PhoneTooLong" xml:space="preserve">
+    <value>Le numéro est trop long.</value>
+  </data>
+  <data name="PhoneTooShort" xml:space="preserve">
+    <value>Le numéro est trop court.</value>
+  </data>
+  <data name="UidInvalidFormat" xml:space="preserve">
+    <value>Le format de l'UID n'est pas valide.</value>
+  </data>
+  <data name="UidInvalidChecksum" xml:space="preserve">
+    <value>La somme de contrôle de l'UID n'est pas correcte.</value>
+  </data>
+  <data name="PostalCodeInvalid" xml:space="preserve">
+    <value>Le code postal n'est pas valable pour le pays {countryCode}.</value>
+  </data>
+  <data name="IbanInvalidChecksum" xml:space="preserve">
+    <value>L'IBAN à une somme de contrôle invalide.</value>
+  </data>
+  <data name="IbanInvalidFormat" xml:space="preserve">
+    <value>L'IBAN à un format invalide.</value>
+  </data>
+  <data name="InvoiceReferenceQrrInvalidChecksum" xml:space="preserve">
+    <value>Le numéro de réference QRR à une somme de contrôle invalide.</value>
+  </data>
+  <data name="InvoiceReferenceScorInvalidChecksum" xml:space="preserve">
+    <value>Le numéro de réference SCOR à une somme de contrôle invalide.</value>
+  </data>
+  <data name="InvoiceReferenceQrrInvalidFormat" xml:space="preserve">
+    <value>Le numéro de réference QRR à un format invalide.</value>
+  </data>
+  <data name="InvoiceReferenceScorInvalidFormat" xml:space="preserve">
+    <value>Le numéro de réference SCOR à un format invalide.</value>
+  </data>
+  <data name="OasiInvalidFormat" xml:space="preserve">
+    <value>Le numàro AVS à un format invalide.</value>
+  </data>
+  <data name="OasiInvalidChecksum" xml:space="preserve">
+    <value>Le numàro AVS à une somme de contrôle invalide.</value>
+  </data>
+</root>

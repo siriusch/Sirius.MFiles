@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VafUtil", "VafUtil\VafUtil.csproj", "{0CB1495F-EB15-43E4-AC4C-227B696A5FCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirius.VAF.Extensions", "Sirius.VAF.Extensions\Sirius.VAF.Extensions.csproj", "{E05A10DB-B968-45A8-8C8E-0C8C65A8347C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirius.VAF.Extensions.Tests", "Sirius.VAF.Extensions.Tests\Sirius.VAF.Extensions.Tests.csproj", "{64B75E9D-A0D7-4B89-95F1-5D76566ACB3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0CB1495F-EB15-43E4-AC4C-227B696A5FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CB1495F-EB15-43E4-AC4C-227B696A5FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CB1495F-EB15-43E4-AC4C-227B696A5FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E05A10DB-B968-45A8-8C8E-0C8C65A8347C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E05A10DB-B968-45A8-8C8E-0C8C65A8347C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E05A10DB-B968-45A8-8C8E-0C8C65A8347C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E05A10DB-B968-45A8-8C8E-0C8C65A8347C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64B75E9D-A0D7-4B89-95F1-5D76566ACB3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64B75E9D-A0D7-4B89-95F1-5D76566ACB3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64B75E9D-A0D7-4B89-95F1-5D76566ACB3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64B75E9D-A0D7-4B89-95F1-5D76566ACB3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

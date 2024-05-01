@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<package>
+  <metadata>
+    <id>Sirius.VAF.Extensions</id>
+    <version>1.0.0</version>
+    <authors>avonwyss</authors>
+    <owners>avonwyss</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/siriusch/Sirius.MFiles</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>M-Files VAF additional extensions</description>
+    <copyright>Copyright 2024 Sirius Technologies AG</copyright>
+    <tags>M-Files VAF</tags>
+    <dependencies>
+      <dependency id="M-Files.VAF" version="23.6.687.1" />
+      <dependency id="M-Files.VAF.Extensions" version="23.3.1" />
+      <dependency id="OneOf" version="3.0.0" />
+      <dependency id="libphonenumber-csharp" version="8.13.0" />
+      <dependency id="postalcodes" version="2.*" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$Configuration$\Sirius.VAF.Extensions.*" target="lib" />
+  </files>
+</package>
