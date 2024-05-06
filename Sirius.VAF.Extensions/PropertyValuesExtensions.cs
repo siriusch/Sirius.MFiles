@@ -10,10 +10,6 @@ using MFilesAPI;
 
 namespace Sirius.VAF {
 	public static class PropertyValuesExtensions {
-		public static bool HasValue(this PropertyValue that) {
-			return that != null && !that.Value.IsEmpty() && !that.Value.IsNULL() && !that.Value.IsUninitialized();
-		}
-
 		public static ObjVerEx LookupObjectByProperty(this PropertyValues that, MFIdentifier propertyDef, Vault vault) {
 			var propValue = that.SearchForPropertyEx(propertyDef, true);
 			if (propValue == null) {
