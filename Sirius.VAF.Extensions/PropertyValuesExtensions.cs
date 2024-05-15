@@ -53,6 +53,26 @@ namespace Sirius.VAF {
 			return that.GetProperty(0).GetValueAsLocalizedText();
 		}
 
+		public static bool TryGetPropertyWithValue(this PropertyValues that, MFIdentifier property, out PropertyValue propVal) {
+			return that.TryGetProperty(property, out propVal) && !(propVal.Value.IsEmpty() || propVal.Value.IsNULL() || propVal.Value.IsUninitialized());
+		}
+
+		public static string GetPropertyTextEx(this PropertyValues that, MFIdentifier property, bool localized, bool longDateFormat, bool noSeconds, bool numericValueAsKilobytes, bool allowDigitGrouping, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) ? propVal.GetValueAsTextEx(localized, true, false, longDateFormat, noSeconds, numericValueAsKilobytes, allowDigitGrouping) : defaultText;
+		}
+
+		public static string GetPropertyUnlocalizedText(this PropertyValues that, MFIdentifier property, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) ? propVal.GetValueAsUnlocalizedText() : defaultText;
+		}
+
+		public static string GetPropertyLocalizedText(this PropertyValues that, MFIdentifier property, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) ? propVal.GetValueAsLocalizedText() : defaultText;
+		}
+
+		public static string GetPropertyLocalizedTextEx(this PropertyValues that, MFIdentifier property, bool allowDigitGrouping, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) ? propVal.GetValueAsLocalizedTextEx(allowDigitGrouping) : defaultText;
+		}
+
 		public static PropertyValue GetOrAdd(PropertyValues that, MFIdentifier property) {
 			var propertyValue = that.SearchForPropertyEx(property, true);
 			if (propertyValue == null) {
