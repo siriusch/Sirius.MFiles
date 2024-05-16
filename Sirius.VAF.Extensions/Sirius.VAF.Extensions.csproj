@@ -145,6 +145,7 @@
     <Compile Include="MFSearchBuilderExtensions.cs" />
     <Compile Include="MFStringBuilder.cs" />
     <Compile Include="MFStringBuilderExtensions.cs" />
+    <Compile Include="ObjectVersionAndPropertiesExtensions.cs" />
     <Compile Include="ObjVerExExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyEnvironmentExtensions.cs" />

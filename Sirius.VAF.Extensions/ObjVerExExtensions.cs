@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using MFiles.VAF.Common;
 using MFiles.VAF.Configuration;
@@ -74,11 +75,14 @@ namespace Sirius.VAF {
 			return that.Vault.ObjectFileOperations.GetFiles(that.ObjVer)[1];
 		}
 
-		public static ObjVerEx ToObjVerEx(this ObjectVersionAndProperties that) {
-			if (that == null) {
-				return null;
+		public static IReadOnlyCollection<int> GetClasses(this ObjVerEx that) {
+			var result = new HashSet<int>() {
+					that.Class
+			};
+			if (that.TryGetPropertyWithValue(MFBuiltInPropertyDef.MFBuiltInPropertyDefAdditionalClasses, out var classes)) {
+				result.UnionWith(classes.Value.GetValueAsLookupIDs());
 			}
-			return new ObjVerEx(that.Vault, that);
+			return result;
 		}
 
 		public static bool UserHasPermissionTo(this ObjVerEx that, int userId, MFPermissionsExpressionType permission, MFConditionType condition = MFConditionType.MFConditionTypeEqual) {

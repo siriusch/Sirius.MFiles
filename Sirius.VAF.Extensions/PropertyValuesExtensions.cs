@@ -53,10 +53,24 @@ namespace Sirius.VAF {
 			return that.GetProperty(0).GetValueAsLocalizedText();
 		}
 
+		public static int GetClass(this PropertyValues that) {
+			return that.GetProperty((int)MFBuiltInPropertyDef.MFBuiltInPropertyDefClass).Value.GetLookupID();
+		}
+
+		public static IReadOnlyCollection<int> GetClasses(this PropertyValues that) {
+			var result = new HashSet<int>() {
+					that.GetClass()
+			};
+			if (that.TryGetPropertyWithValue(MFBuiltInPropertyDef.MFBuiltInPropertyDefAdditionalClasses, out var classes)) {
+				result.UnionWith(classes.Value.GetValueAsLookupIDs());
+			}
+			return result;
+		}
+
 		public static bool TryGetPropertyWithValue(this PropertyValues that, MFIdentifier property, out PropertyValue propVal) {
 			return that.TryGetProperty(property, out propVal) && !(propVal.Value.IsEmpty() || propVal.Value.IsNULL() || propVal.Value.IsUninitialized());
 		}
-
+		
 		public static string GetPropertyDisplayValue(this PropertyValues that, MFIdentifier property, string defaultText = "") {
 			return that.TryGetPropertyWithValue(property, out var propVal) 
 					? propVal.Value.DisplayValue 
