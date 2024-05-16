@@ -1,6 +1,7 @@
 ﻿using System;
 
 using MFiles.VAF.Common;
+using MFiles.VAF.Configuration;
 using MFiles.VAF.Extensions;
 
 using MFilesAPI;
@@ -99,6 +100,40 @@ namespace Sirius.VAF {
 
 		public static bool DeletableBy(this ObjVerEx that, int userId) {
 			return that.UserHasPermissionTo(userId, MFPermissionsExpressionType.MFDeletableBy);
+		}
+		
+		public static bool TryGetPropertyWithValue(this ObjVerEx that, MFIdentifier property, out PropertyValue propVal) {
+			return that.TryGetProperty(property, out propVal) && !(propVal.Value.IsEmpty() || propVal.Value.IsNULL() || propVal.Value.IsUninitialized());
+		}
+
+		public static string GetPropertyDisplayValue(this ObjVerEx that, MFIdentifier property, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) 
+					? propVal.Value.DisplayValue 
+					: defaultText;
+		}
+
+		public static string GetPropertyTextEx(this ObjVerEx that, MFIdentifier property, bool localized, bool longDateFormat, bool noSeconds, bool numericValueAsKilobytes, bool allowDigitGrouping, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) 
+					? propVal.GetValueAsTextEx(localized, true, false, longDateFormat, noSeconds, numericValueAsKilobytes, allowDigitGrouping) 
+					: defaultText;
+		}
+
+		public static string GetPropertyUnlocalizedText(this ObjVerEx that, MFIdentifier property, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) 
+					? propVal.GetValueAsUnlocalizedText() 
+					: defaultText;
+		}
+
+		public static string GetPropertyLocalizedText(this ObjVerEx that, MFIdentifier property, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) 
+					? propVal.GetValueAsLocalizedText() 
+					: defaultText;
+		}
+
+		public static string GetPropertyLocalizedTextEx(this ObjVerEx that, MFIdentifier property, bool allowDigitGrouping, string defaultText = "") {
+			return that.TryGetPropertyWithValue(property, out var propVal) 
+					? propVal.GetValueAsLocalizedTextEx(allowDigitGrouping) 
+					: defaultText;
 		}
 	}
 }
