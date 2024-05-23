@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+
+using JetBrains.Annotations;
+
 using MFilesAPI;
 
 namespace Sirius.VAF {
