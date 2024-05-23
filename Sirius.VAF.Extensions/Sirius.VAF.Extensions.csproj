@@ -140,6 +140,7 @@
     <Compile Include="Data\PhoneNumber.cs" />
     <Compile Include="Data\PostalCode.cs" />
     <Compile Include="Data\SwissUid.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="LookupComparer.cs" />
     <Compile Include="LookupsExtensions.cs" />
     <Compile Include="MFSearchBuilderExtensions.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="PropertyEnvironmentExtensions.cs" />
     <Compile Include="PropertyValueExtensions.cs" />
     <Compile Include="PropertyValuesExtensions.cs" />
+    <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Strings.Designer.cs">
       <AutoGen>True</AutoGen>
