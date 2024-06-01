@@ -41,6 +41,9 @@
       <HintPath>..\packages\Interop.MFilesAPI.24.2.8\lib\net45\Interop.MFilesAPI.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="JetBrains.Annotations, Version=4242.42.42.42, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.2023.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="MFiles.Crypto, Version=24.2.13421.8, Culture=neutral, PublicKeyToken=fa007b370d17fe5e, processorArchitecture=MSIL">
       <HintPath>..\packages\MFiles.Crypto.24.2.8\lib\net472\MFiles.Crypto.dll</HintPath>
     </Reference>
@@ -67,16 +70,16 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.5.2.8\lib\net46\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.5.3.2\lib\net46\NLog.dll</HintPath>
     </Reference>
     <Reference Include="NLog.Database, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.Database.5.2.8\lib\net46\NLog.Database.dll</HintPath>
+      <HintPath>..\packages\NLog.Database.5.3.2\lib\net46\NLog.Database.dll</HintPath>
     </Reference>
     <Reference Include="OneOf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OneOf.3.0.263\lib\net45\OneOf.dll</HintPath>
     </Reference>
-    <Reference Include="PhoneNumbers, Version=8.13.32.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\libphonenumber-csharp.8.13.32\lib\netstandard2.0\PhoneNumbers.dll</HintPath>
+    <Reference Include="PhoneNumbers, Version=8.13.36.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\libphonenumber-csharp.8.13.36\lib\netstandard2.0\PhoneNumbers.dll</HintPath>
     </Reference>
     <Reference Include="PostalCodes, Version=2.1.0.197, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PostalCodes.2.1.0.197\lib\net40\PostalCodes.dll</HintPath>
@@ -97,8 +100,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Numerics" />

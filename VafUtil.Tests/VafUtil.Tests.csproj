@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\xunit.core.2.8.0\build\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.8.0\build\xunit.core.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.Toolset.4.9.2\build\Microsoft.Net.Compilers.Toolset.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.Toolset.4.9.2\build\Microsoft.Net.Compilers.Toolset.props')" />
+  <Import Project="..\packages\xunit.core.2.8.0\build\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.8.0\build\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{64B75E9D-A0D7-4B89-95F1-5D76566ACB3B}</ProjectGuid>
+    <ProjectGuid>{373FE24E-78BA-42F2-AC8A-74D717D8DB58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sirius.VAF</RootNamespace>
-    <AssemblyName>Sirius.VAF.Extensions.Tests</AssemblyName>
+    <RootNamespace>VafUtil</RootNamespace>
+    <AssemblyName>VafUtil.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -24,7 +24,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,7 +32,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="JetBrains.Annotations, Version=4242.42.42.42, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
@@ -61,33 +59,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sirius.VAF.Extensions\Sirius.VAF.Extensions.csproj">
-      <Project>{E05A10DB-B968-45A8-8C8E-0C8C65A8347C}</Project>
-      <Name>Sirius.VAF.Extensions</Name>
+    <ProjectReference Include="..\VafUtil\VafUtil.csproj">
+      <Project>{0cb1495f-eb15-43e4-ac4c-227b696a5fcc}</Project>
+      <Name>VafUtil</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChecksumTests.cs" />
-    <Compile Include="Data\IbanTests.cs" />
-    <Compile Include="Data\InvoiceReferenceTests.cs" />
-    <Compile Include="Data\OasiTests.cs" />
-    <Compile Include="Data\PhoneNumberTests.cs" />
-    <Compile Include="Data\PostalCodeTests.cs" />
-    <Compile Include="Data\SwissUidTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vault\FileResolverTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.Toolset.4.9.2\build\Microsoft.Net.Compilers.Toolset.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.Toolset.4.9.2\build\Microsoft.Net.Compilers.Toolset.props'))" />
     <Error Condition="!Exists('..\packages\xunit.core.2.8.0\build\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.8.0\build\xunit.core.props'))" />
     <Error Condition="!Exists('..\packages\xunit.core.2.8.0\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.8.0\build\xunit.core.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.Toolset.4.9.2\build\Microsoft.Net.Compilers.Toolset.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.Toolset.4.9.2\build\Microsoft.Net.Compilers.Toolset.props'))" />
   </Target>
   <Import Project="..\packages\xunit.core.2.8.0\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.8.0\build\xunit.core.targets')" />
 </Project>
