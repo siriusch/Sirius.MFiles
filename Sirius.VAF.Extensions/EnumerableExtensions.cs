@@ -4,7 +4,9 @@ using System.Collections.Generic;
 namespace Sirius.VAF {
 	public static class EnumerableExtensions {
 		public delegate bool TryFunc<in TIn, TOut>(TIn value, out TOut result);
+
 		public delegate bool TryFunc<in TIn, in T, TOut>(TIn value, T arg, out TOut result);
+
 		public delegate bool TryFunc<in TIn, in T1, in T2, TOut>(TIn value, T1 arg1, T2 arg2, out TOut result);
 
 		public static IEnumerable<TOut> SelectWhere<TIn, TOut>(this IEnumerable<TIn> that, TryFunc<TIn, TOut> selectWhere) {

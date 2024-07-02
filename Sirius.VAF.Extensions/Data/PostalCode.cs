@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Configuration;
-
-using MFilesAPI;
 
 namespace Sirius.VAF.Data {
 	public class PostalCode {
@@ -10,7 +7,7 @@ namespace Sirius.VAF.Data {
 		}
 
 		public PostalCode(string countryCode) {
-			this.CountryCode = countryCode;
+			CountryCode = countryCode;
 		}
 
 		public bool CheckAndNormalize(string postalCode, out string formattedPostalCode, out string message) {
@@ -24,7 +21,7 @@ namespace Sirius.VAF.Data {
 					message = Strings.PostalCodeInvalid(CountryCode);
 					return false;
 				}
-			} 
+			}
 			message = "";
 			return !string.IsNullOrEmpty(postalCode);
 		}

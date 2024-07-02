@@ -19,7 +19,7 @@ namespace Sirius.VAF.Data {
 		[InlineData("RF18539007547034", "RF18 5390 0754 7034", true)]
 		[InlineData("000000000000000000000000000", "00 00000 00000 00000 00000 00000", true)]
 		public void CheckAndNormalizeTest(string input, string expectedFormattedRefNr, bool expected) {
-			var result =InvoiceReference.CheckAndNormalize(input, out var formattedRefNr, out var message);
+			var result = InvoiceReference.CheckAndNormalize(input, out var formattedRefNr, out var message);
 			if (result) {
 				Output.WriteLine($"Formatted: {formattedRefNr}");
 				Assert.Equal(expectedFormattedRefNr, formattedRefNr);
@@ -34,7 +34,7 @@ namespace Sirius.VAF.Data {
 		[InlineData("RF18539007547034", "RF18 5390 0754 7034", true)]
 		[InlineData("RF18 5390 0754 7034", "RF18 5390 0754 7034", true)]
 		public void CheckAndNormalizeScorTest(string input, string expectedFormattedRefNr, bool expected) {
-			var result =InvoiceReference.CheckAndNormalizeScor(input, out var formattedRefNr, out var message);
+			var result = InvoiceReference.CheckAndNormalizeScor(input, out var formattedRefNr, out var message);
 			if (result) {
 				Output.WriteLine($"Formatted SCOR: {formattedRefNr}");
 				Assert.Equal(expectedFormattedRefNr, formattedRefNr);
@@ -49,7 +49,7 @@ namespace Sirius.VAF.Data {
 		[InlineData("000000000000000000000000000", "00 00000 00000 00000 00000 00000", true)]
 		[InlineData("00 00000 00000 00000 00000 00000", "00 00000 00000 00000 00000 00000", true)]
 		public void CheckAndNormalizeQrrTest(string input, string expectedFormattedRefNr, bool expected) {
-			var result =InvoiceReference.CheckAndNormalizeQrr(input, out var formattedRefNr, out var message);
+			var result = InvoiceReference.CheckAndNormalizeQrr(input, out var formattedRefNr, out var message);
 			if (result) {
 				Output.WriteLine($"Formatted QRR: {formattedRefNr}");
 				Assert.Equal(expectedFormattedRefNr, formattedRefNr);

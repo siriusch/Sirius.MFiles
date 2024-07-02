@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{672F7839-06B4-4212-A932-0015D1BBF9EE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sirius.VAF.VaultDom</RootNamespace>
+    <AssemblyName>Sirius.VAF.VaultDom</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.MFilesAPI, Version=7.0.0.0, Culture=neutral, PublicKeyToken=f1b4733f444f7ad0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Interop.MFilesAPI.24.2.8\lib\net45\Interop.MFilesAPI.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=4242.42.42.42, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.2023.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sirius.XML\Sirius.XML.csproj">
+      <Project>{F52F36C0-F387-4B78-B575-C88B2B9AED8E}</Project>
+      <Name>Sirius.XML</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivableElementBase.cs" />
+    <Compile Include="Archive\ArchiveDocument.cs" />
+    <Compile Include="Archive\ArchiveElement.cs" />
+    <Compile Include="Archive\ArchiveFlagsElement.cs" />
+    <Compile Include="Archive\DeltaElement.cs" />
+    <Compile Include="Archive\FeatureElement.cs" />
+    <Compile Include="Archive\StatisticsElement.cs" />
+    <Compile Include="Archive\TimestampElement.cs" />
+    <Compile Include="Archive\VaultElement.cs" />
+    <Compile Include="ArchiveReader.cs" />
+    <Compile Include="Content\CapabilitiesElement.cs" />
+    <Compile Include="Content\ContentElement.cs" />
+    <Compile Include="Content\OriginalIdentityElement.cs" />
+    <Compile Include="Content\ParentReferenceElement.cs" />
+    <Compile Include="Content\VlItemElement.cs" />
+    <Compile Include="FileResolver.cs" />
+    <Compile Include="FlagsElementBase.cs" />
+    <Compile Include="IActivable.cs" />
+    <Compile Include="IElementInfoProvider.cs" />
+    <Compile Include="INotifyActiveChange.cs" />
+    <Compile Include="Prologue\AceElement.cs" />
+    <Compile Include="Prologue\AceRightElement.cs" />
+    <Compile Include="Prologue\AceRightValue.cs" />
+    <Compile Include="Prologue\AclComponentElementBase.cs" />
+    <Compile Include="Prologue\AclDefinitionElement.cs" />
+    <Compile Include="Prologue\GroupReferenceElement.cs" />
+    <Compile Include="Prologue\NamedAclReferenceElement.cs" />
+    <Compile Include="Prologue\NamedAclType.cs" />
+    <Compile Include="Prologue\PrologueElement.cs" />
+    <Compile Include="Prologue\PseudoUserElement.cs" />
+    <Compile Include="Prologue\PseudoUserType.cs" />
+    <Compile Include="Prologue\SubjectReferenceElementBase.cs" />
+    <Compile Include="Prologue\UserReferenceElement.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectOneElementBase.cs" />
+    <Compile Include="Structure\AclContentElement.cs" />
+    <Compile Include="Structure\AclForNaclElement.cs" />
+    <Compile Include="Structure\AclReferenceElement.cs" />
+    <Compile Include="Structure\ActionElement.cs" />
+    <Compile Include="Structure\ActionsElement.cs" />
+    <Compile Include="Structure\AllowedByScriptElement.cs" />
+    <Compile Include="Structure\AssignedToElement.cs" />
+    <Compile Include="Structure\AssignmentCompleteElement.cs" />
+    <Compile Include="Structure\AssignmentInfoElement.cs" />
+    <Compile Include="Structure\AssignmentRejectedElement.cs" />
+    <Compile Include="Structure\AssignmentSubjectsElementBase.cs" />
+    <Compile Include="Structure\AssignmentType.cs" />
+    <Compile Include="Structure\AutomaticAclElement.cs" />
+    <Compile Include="Structure\AutomaticValue\AutomaticValueType.cs" />
+    <Compile Include="Structure\AutomaticValue\AutoNumberSimpleElement.cs" />
+    <Compile Include="Structure\AutomaticValue\AutoNumberWithVBScriptElement.cs" />
+    <Compile Include="Structure\AutomaticValue\CalcSimpleElementBase.cs" />
+    <Compile Include="Structure\AutomaticValue\CalcVBScriptElementBase.cs" />
+    <Compile Include="Structure\AutomaticValue\CalcWithPlaceholdersElement.cs" />
+    <Compile Include="Structure\AutomaticValue\CalcWithVBScriptElement.cs" />
+    <Compile Include="Structure\AutomaticValueElement.cs" />
+    <Compile Include="Structure\CachedElement.cs" />
+    <Compile Include="Structure\CapabilitiesFlags.cs" />
+    <Compile Include="Structure\ChangePermissionsElement.cs" />
+    <Compile Include="Structure\ClassElement.cs" />
+    <Compile Include="Structure\ClassGroupElement.cs" />
+    <Compile Include="Structure\ClassReferenceElement.cs" />
+    <Compile Include="Structure\ConditionElement.cs" />
+    <Compile Include="Structure\CondsElementBase.cs" />
+    <Compile Include="Structure\CondsFlags.cs" />
+    <Compile Include="Structure\CondsFlagsElement.cs" />
+    <Compile Include="Structure\ConfigurationRuleElement.cs" />
+    <Compile Include="Structure\ConvertToPdfElement.cs" />
+    <Compile Include="Structure\CreateAssignmentElement.cs" />
+    <Compile Include="Structure\CreateSeparateAssignmentElement.cs" />
+    <Compile Include="Structure\CriteriaElement.cs" />
+    <Compile Include="Structure\CriteriaFulfilledElement.cs" />
+    <Compile Include="Structure\DataTypeElement.cs" />
+    <Compile Include="Structure\DataTypes\BooleanElement.cs" />
+    <Compile Include="Structure\DataTypes\DataTypeElementBase.cs" />
+    <Compile Include="Structure\DataTypes\DateElement.cs" />
+    <Compile Include="Structure\DataTypes\FloatElement.cs" />
+    <Compile Include="Structure\DataTypes\IntegerElement.cs" />
+    <Compile Include="Structure\DataTypes\LookupElement.cs" />
+    <Compile Include="Structure\DataTypes\LookupElementBase.cs" />
+    <Compile Include="Structure\DataTypes\MultiLineTextElement.cs" />
+    <Compile Include="Structure\DataTypes\MultiSelectLookupElement.cs" />
+    <Compile Include="Structure\DataTypes\TextContentType.cs" />
+    <Compile Include="Structure\DataTypes\TextElement.cs" />
+    <Compile Include="Structure\DataTypes\TextElementBase.cs" />
+    <Compile Include="Structure\DataTypes\TimeElement.cs" />
+    <Compile Include="Structure\DataTypes\TimestampElement.cs" />
+    <Compile Include="Structure\DeadlineElement.cs" />
+    <Compile Include="Structure\DefaultPropertyElement.cs" />
+    <Compile Include="Structure\DefaultPropertyType.cs" />
+    <Compile Include="Structure\DefinitionElementBase.cs" />
+    <Compile Include="Structure\DeleteElement.cs" />
+    <Compile Include="Structure\DfCallElement.cs" />
+    <Compile Include="Structure\ExpressionElement.cs" />
+    <Compile Include="Structure\ExpressionExElement.cs" />
+    <Compile Include="Structure\ExpressionExFlagsElement.cs" />
+    <Compile Include="Structure\Expressions\ACLExprElement.cs" />
+    <Compile Include="Structure\Expressions\AnyFieldExprElement.cs" />
+    <Compile Include="Structure\Expressions\ExpressionElementBase.cs" />
+    <Compile Include="Structure\Expressions\FileValueExprElement.cs" />
+    <Compile Include="Structure\Expressions\ParentChildBehavior.cs" />
+    <Compile Include="Structure\Expressions\PropertyValueExprElement.cs" />
+    <Compile Include="Structure\Expressions\StatusValueExprElement.cs" />
+    <Compile Include="Structure\Expressions\TypedValueExprElement.cs" />
+    <Compile Include="Structure\ExternalGroupElement.cs" />
+    <Compile Include="Structure\ExternalGroupImportMode.cs" />
+    <Compile Include="Structure\ExternalObjTypeElement.cs" />
+    <Compile Include="Structure\FolderReferenceElement.cs" />
+    <Compile Include="Structure\Formatting\FormattingType.cs" />
+    <Compile Include="Structure\FormattingElement.cs" />
+    <Compile Include="Structure\FreeformElement.cs" />
+    <Compile Include="Structure\GroupElement.cs" />
+    <Compile Include="Structure\IconElement.cs" />
+    <Compile Include="Structure\IFileReference.cs" />
+    <Compile Include="Structure\IndirectionType.cs" />
+    <Compile Include="Structure\InOutElement.cs" />
+    <Compile Include="Structure\LanguageElement.cs" />
+    <Compile Include="Structure\LayoutElement.cs" />
+    <Compile Include="Structure\LevelElement.cs" />
+    <Compile Include="Structure\LoginElement.cs" />
+    <Compile Include="Structure\LookupReferenceElement.cs" />
+    <Compile Include="Structure\ManifestationElement.cs" />
+    <Compile Include="Structure\MarkForArchivingElement.cs" />
+    <Compile Include="Structure\MonitoredByElement.cs" />
+    <Compile Include="Structure\NamedAclElement.cs" />
+    <Compile Include="Structure\NamePropertyElement.cs" />
+    <Compile Include="Structure\ObjectTypeElement.cs" />
+    <Compile Include="Structure\ObjTypeElement.cs" />
+    <Compile Include="Structure\ObjTypeFlags.cs" />
+    <Compile Include="Structure\ObjTypeFlagsElement.cs" />
+    <Compile Include="Structure\OwnerElement.cs" />
+    <Compile Include="Structure\OwnerPdElement.cs" />
+    <Compile Include="Structure\PostCondsElement.cs" />
+    <Compile Include="Structure\PreCondsElement.cs" />
+    <Compile Include="Structure\PropertyDefElement.cs" />
+    <Compile Include="Structure\PropertyDefFlags.cs" />
+    <Compile Include="Structure\PropertyDefFlagsElement.cs" />
+    <Compile Include="Structure\PropertyDefUpdateType.cs" />
+    <Compile Include="Structure\PropertyElement.cs" />
+    <Compile Include="Structure\RecipientsElement.cs" />
+    <Compile Include="Structure\RegEx.cs" />
+    <Compile Include="Structure\RelativeTimeElement.cs" />
+    <Compile Include="Structure\RunScriptElement.cs" />
+    <Compile Include="Structure\ScriptElement.cs" />
+    <Compile Include="Structure\SearchCondElement.cs" />
+    <Compile Include="Structure\SearchDefElement.cs" />
+    <Compile Include="Structure\SearchFlagsElement.cs" />
+    <Compile Include="Structure\SendNotificationElement.cs" />
+    <Compile Include="Structure\ServerRolesElement.cs" />
+    <Compile Include="Structure\SetPropertiesElement.cs" />
+    <Compile Include="Structure\SignatureContext.cs" />
+    <Compile Include="Structure\SignatureElement.cs" />
+    <Compile Include="Structure\SignatureMode.cs" />
+    <Compile Include="Structure\SortingElement.cs" />
+    <Compile Include="Structure\StateAction.cs" />
+    <Compile Include="Structure\StateElement.cs" />
+    <Compile Include="Structure\StateReferenceElement.cs" />
+    <Compile Include="Structure\StructureCapabilitiesElement.cs" />
+    <Compile Include="Structure\StructureElement.cs" />
+    <Compile Include="Structure\TargetElement.cs" />
+    <Compile Include="Structure\TransitionElement.cs" />
+    <Compile Include="Structure\TransitionReferenceElement.cs" />
+    <Compile Include="Structure\TriggerElement.cs" />
+    <Compile Include="Structure\TypedValueDataType.cs" />
+    <Compile Include="Structure\TypedValueElement.cs" />
+    <Compile Include="Structure\UserElement.cs" />
+    <Compile Include="Structure\ValidationElement.cs" />
+    <Compile Include="Structure\Validations\RegExElement.cs" />
+    <Compile Include="Structure\Validations\ValidationType.cs" />
+    <Compile Include="Structure\Validations\VBScriptElement.cs" />
+    <Compile Include="Structure\ValueElement.cs" />
+    <Compile Include="Structure\VaultRolesElement.cs" />
+    <Compile Include="Structure\VBScriptElement.cs" />
+    <Compile Include="Structure\ViewAllowedOperationsElement.cs" />
+    <Compile Include="Structure\ViewElement.cs" />
+    <Compile Include="Structure\ViewFlagsElement.cs" />
+    <Compile Include="Structure\ViewLocationElement.cs" />
+    <Compile Include="Structure\ViewOverlappingElement.cs" />
+    <Compile Include="Structure\ViewParentElement.cs" />
+    <Compile Include="Structure\ViewUiSettingElement.cs" />
+    <Compile Include="Structure\WorkflowElement.cs" />
+    <Compile Include="Structure\WorkflowReferenceElement.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Interop.MFilesAPI.24.2.8\build\Interop.MFilesAPI.targets" Condition="Exists('..\packages\Interop.MFilesAPI.24.2.8\build\Interop.MFilesAPI.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Interop.MFilesAPI.24.2.8\build\Interop.MFilesAPI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Interop.MFilesAPI.24.2.8\build\Interop.MFilesAPI.targets'))" />
+  </Target>
+</Project>

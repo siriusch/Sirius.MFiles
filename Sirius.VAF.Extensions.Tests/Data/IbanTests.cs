@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 using Xunit;
 using Xunit.Abstractions;

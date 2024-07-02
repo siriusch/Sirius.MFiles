@@ -12,7 +12,7 @@ namespace Sirius.XML {
 		}
 
 		public void RegisterElement<TParent, TElement>(XName name) where TElement: XElement
-		                                                            where TParent: XElement {
+		                                                           where TParent: XElement {
 			elementTypes.Add((typeof(TParent), name), CreateElementInfo<TElement>());
 		}
 

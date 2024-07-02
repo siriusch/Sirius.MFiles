@@ -15,9 +15,9 @@ namespace Sirius.VAF.Data {
 		}
 
 		[Theory]
-		[InlineData("1234567890128", "123.4567.8901.28", true)] 
-		[InlineData("123.4567.8901.28", "123.4567.8901.28", true)] 
-		[InlineData("GB82TEST12345698765432", null, false)] 
+		[InlineData("1234567890128", "123.4567.8901.28", true)]
+		[InlineData("123.4567.8901.28", "123.4567.8901.28", true)]
+		[InlineData("GB82TEST12345698765432", null, false)]
 		public void CheckAndNormalizeTest(string oasi, string expectedFormattedOasi, bool expected) {
 			var result = Oasi.CheckAndNormalize(oasi, out var formattedOasi, out var message);
 			if (result) {

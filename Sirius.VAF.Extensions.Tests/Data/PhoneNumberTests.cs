@@ -15,10 +15,10 @@ namespace Sirius.VAF.Data {
 		}
 
 		[Theory]
-		[InlineData("0033123456789", "+33 1 23 45 67 89", true)] 
-		[InlineData("+41613757575", "+41 61 375 75 75", true)] 
-		[InlineData("0613757575", "+41 61 375 75 75", true)] 
-		[InlineData("123", null, false)] 
+		[InlineData("0033123456789", "+33 1 23 45 67 89", true)]
+		[InlineData("+41613757575", "+41 61 375 75 75", true)]
+		[InlineData("0613757575", "+41 61 375 75 75", true)]
+		[InlineData("123", null, false)]
 		public void CheckAndNormalizeTest(string phoneNumber, string expectedFormattedPhoneNumber, bool expected) {
 			var result = new PhoneNumber("CH").CheckAndNormalize(phoneNumber, out var formattedPhoneNumber, out var message);
 			if (result) {

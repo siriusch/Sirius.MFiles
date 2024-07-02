@@ -51,6 +51,18 @@ namespace Sirius.XML {
 						paraValue).Compile();
 				return;
 			}
+			// Convert enums with their name
+			if (typeof(T).IsEnum) {
+				Parse = str => (T)Enum.Parse(typeof(T), str);
+				Stringify = value => value.ToString();
+				return;
+			}
+			// Special handling of Version
+			if (typeof(T) == typeof(Version)) {
+				Parse = (Func<string, T>)(object)new Func<string, Version>(str => string.IsNullOrEmpty(str) ? null : Version.Parse(str));
+				Stringify = (Func<T, string>)(object)new Func<Version, string>(value => value?.ToString());
+				return;
+			}
 			// Special handling of DateTime, we want this in universal time and without fraction
 			if (typeof(T) == typeof(DateTime)) {
 				Parse = (Func<string, T>)(object)new Func<string, DateTime>(str => XmlConvert.ToDateTime(str, XmlDateTimeSerializationMode.Utc));
@@ -98,26 +110,32 @@ namespace Sirius.XML {
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void Set([NotNull] XElement owner, [NotNull] XName name, [NotNull] T value) {
-			Set(owner, name, value, Stringify);
+		public static bool Set([NotNull] XElement owner, [NotNull] XName name, [NotNull] T value) {
+			return Set(owner, name, value, Stringify);
 		}
 
-		public static void Set([NotNull] XElement owner, [NotNull] XName name, [NotNull] T value, [NotNull] Func<T, string> stringify) {
+		public static bool Set([NotNull] XElement owner, [NotNull] XName name, [NotNull] T value, [NotNull] Func<T, string> stringify) {
 			var attr = owner.Attribute(name);
-			if (attr == null) {
+			if (attr != null) {
+				var newValue = stringify(value);
+				if (StringComparer.Ordinal.Equals(newValue, attr.Value)) {
+					// No change required
+					return false;
+				}
+				attr.Value = newValue;
+			} else {
 				attr = new XAttribute(name, stringify(value));
 				owner.Add(attr);
-			} else {
-				attr.Value = stringify(value);
 			}
+			return true;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetOrRemove([NotNull] XElement owner, [NotNull] XName name, T value) {
-			SetOrRemove(owner, name, value, Stringify);
+		public static bool SetOrRemove([NotNull] XElement owner, [NotNull] XName name, T value) {
+			return SetOrRemove(owner, name, value, Stringify);
 		}
 
-		public static void SetOrRemove([NotNull] XElement owner, [NotNull] XName name, T value, [NotNull] Func<T, string> stringify) {
+		public static bool SetOrRemove([NotNull] XElement owner, [NotNull] XName name, T value, [NotNull] Func<T, string> stringify) {
 			var attr = owner.Attribute(name);
 			if (EqualityComparer<T>.Default.Equals(value, default)) {
 				attr?.Remove();
@@ -125,8 +143,14 @@ namespace Sirius.XML {
 				attr = new XAttribute(name, stringify(value));
 				owner.Add(attr);
 			} else {
-				attr.Value = stringify(value);
+				var newValue = stringify(value);
+				if (StringComparer.Ordinal.Equals(newValue, attr.Value)) {
+					// No change required
+					return false;
+				}
+				attr.Value = newValue;
 			}
+			return true;
 		}
 	}
 }

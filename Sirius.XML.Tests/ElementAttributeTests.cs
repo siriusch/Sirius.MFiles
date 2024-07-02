@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -14,7 +13,7 @@ namespace Sirius.XML {
 	public class ElementAttributeTests {
 		private static readonly Func<string, string> Passthrough = s => s;
 
-		private XElement element = new XElement("elem",
+		private XElement element = new("elem",
 				new XAttribute("yes", "true"),
 				new XAttribute("no", "false"),
 				new XAttribute("one", "1"),
@@ -123,7 +122,7 @@ namespace Sirius.XML {
 		[InlineData("TRUE")]
 		[InlineData("False")]
 		public void NullableBoolean_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<bool?>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<bool?>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -149,7 +148,7 @@ namespace Sirius.XML {
 		[InlineData("TRUE")]
 		[InlineData("False")]
 		public void Boolean_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<bool>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<bool>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -174,7 +173,7 @@ namespace Sirius.XML {
 		[InlineData("1.1")]
 		[InlineData("abc")]
 		public void Int_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<int>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<int>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -198,7 +197,7 @@ namespace Sirius.XML {
 		[InlineData("")]
 		[InlineData("abc")]
 		public void Double_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<double>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<double>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -219,7 +218,7 @@ namespace Sirius.XML {
 		[InlineData("")]
 		[InlineData("abc")]
 		public void DateTime_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<DateTime>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<DateTime>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -233,7 +232,7 @@ namespace Sirius.XML {
 		[InlineData("")]
 		[InlineData("abc")]
 		public void DateTimeOffset_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<DateTimeOffset>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<DateTimeOffset>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -263,7 +262,7 @@ namespace Sirius.XML {
 		[InlineData("")]
 		[InlineData("abc")]
 		public void Decimal_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<decimal>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<decimal>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -288,7 +287,7 @@ namespace Sirius.XML {
 		[InlineData("1.1")]
 		[InlineData("abc")]
 		public void Long_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<long>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<long>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -313,7 +312,7 @@ namespace Sirius.XML {
 		[InlineData("1.1")]
 		[InlineData("abc")]
 		public void Short_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<short>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<short>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -337,7 +336,7 @@ namespace Sirius.XML {
 		[InlineData("")]
 		[InlineData("abc")]
 		public void Float_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<float>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<float>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -361,7 +360,7 @@ namespace Sirius.XML {
 		[InlineData("abc")]
 		[InlineData("-1")]
 		public void Byte_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<byte>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<byte>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -386,7 +385,7 @@ namespace Sirius.XML {
 		[InlineData("1.1")]
 		[InlineData("abc")]
 		public void SByte_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<sbyte>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<sbyte>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -410,7 +409,7 @@ namespace Sirius.XML {
 		[InlineData("abc")]
 		[InlineData("-1")]
 		public void UInt_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<uint>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<uint>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -434,7 +433,7 @@ namespace Sirius.XML {
 		[InlineData("abc")]
 		[InlineData("-1")]
 		public void ULong_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<ulong>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<ulong>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -458,7 +457,7 @@ namespace Sirius.XML {
 		[InlineData("abc")]
 		[InlineData("-1")]
 		public void UShort_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<ushort>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<ushort>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -478,7 +477,7 @@ namespace Sirius.XML {
 		[InlineData("")]
 		[InlineData("abc")]
 		public void Char_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<char>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<char>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -498,7 +497,7 @@ namespace Sirius.XML {
 		[InlineData("")]
 		[InlineData("abc")]
 		public void TimeSpan_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<TimeSpan>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<TimeSpan>.Parse(value)).Message);
 		}
 
 		[Theory]
@@ -511,6 +510,7 @@ namespace Sirius.XML {
 		[Theory]
 		[InlineData("00000000-0000-0000-0000-000000000000", "00000000-0000-0000-0000-000000000000")]
 		[InlineData("AFF57EAF-78C6-487F-8A77-A6BE298DECA1", "AFF57EAF-78C6-487F-8A77-A6BE298DECA1")]
+		[InlineData("AFF57EAF-78C6-487F-8A77-A6BE298DECA1", "{AFF57EAF-78C6-487F-8A77-A6BE298DECA1}")]
 		public void Guid_Parse_OK(string expected, string value) {
 			Assert.Equal(Guid.Parse(expected), ElementAttribute<Guid>.Parse(value));
 		}
@@ -520,7 +520,55 @@ namespace Sirius.XML {
 		[InlineData("")]
 		[InlineData("abc")]
 		public void Guid_Parse_Error(string value) {
-			Assert.ThrowsAny<Exception>(() => ElementAttribute<Guid>.Parse(value));
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<Guid>.Parse(value)).Message);
+		}
+
+		[Theory]
+		[InlineData("0.0.0.0", "0.0.0.0")]
+		[InlineData("1.2.3.4", "1.2.3.4")]
+		[InlineData("1.2.3", "1.2.3")]
+		[InlineData("1.2", "1.2")]
+		public void Version_Stringify(string expected, string value) {
+			Assert.Equal(expected, ElementAttribute<Version>.Stringify(Version.Parse(value)));
+		}
+
+		[Theory]
+		[InlineData("0.0.0.0", "0.0.0.0")]
+		[InlineData("1.2.3.4", "1.2.3.4")]
+		[InlineData("1.2.3", "1.2.3")]
+		[InlineData("1.2", "1.2")]
+		public void Version_Parse_OK(string expected, string value) {
+			Assert.Equal(Version.Parse(expected), ElementAttribute<Version>.Parse(value));
+		}
+
+		[Theory]
+		[InlineData("abc")]
+		[InlineData("-1.0")]
+		[InlineData("12345678901.0")]
+		[InlineData("1.2.3.4.5")]
+		public void Version_Parse_Error(string value) {
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<Version>.Parse(value)).Message);
+		}
+
+		[Theory]
+		[InlineData("All", AttributeTargets.All)]
+		[InlineData("Parameter", AttributeTargets.Parameter)]
+		public void Enum_Stringify(string expected, AttributeTargets value) {
+			Assert.Equal(expected, ElementAttribute<AttributeTargets>.Stringify(value));
+		}
+
+		[Theory]
+		[InlineData(AttributeTargets.All, "All")]
+		[InlineData(AttributeTargets.Parameter, "Parameter")]
+		public void Enum_Parse_OK(AttributeTargets expected, string value) {
+			Assert.Equal(expected, ElementAttribute<AttributeTargets>.Parse(value));
+		}
+
+		[Theory]
+		[InlineData("abc")]
+		[InlineData("2")]
+		public void Enum_Parse_Error(string value) {
+			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<AttributeTargets>.Parse(value)).Message);
 		}
 	}
 }

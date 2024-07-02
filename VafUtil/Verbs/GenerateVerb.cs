@@ -14,7 +14,7 @@ using Sirius.MFiles.VafUtil.Options;
 
 namespace Sirius.MFiles.VafUtil.Verbs {
 	internal class GenerateVerb {
-		private static readonly Regex rxNamespaceDetect = new Regex(@"^(//[^\r\n]+|/\*((?!\*/).)*\*/|[^{])*\bnamespace\s+(?<ns>[\p{L}_][\p{L}0-9_]*(\s*\.\s*[\p{L}_][\p{L}0-9_]*)*)\b\s*\{", RegexOptions.ExplicitCapture|RegexOptions.CultureInvariant);
+		private static readonly Regex rxNamespaceDetect = new(@"^(//[^\r\n]+|/\*((?!\*/).)*\*/|[^{])*\bnamespace\s+(?<ns>[\p{L}_][\p{L}0-9_]*(\s*\.\s*[\p{L}_][\p{L}0-9_]*)*)\b\s*\{", RegexOptions.ExplicitCapture|RegexOptions.CultureInvariant);
 
 		private static XslCompiledTransform LoadEmbeddedTransform(string name) {
 			var transform = new XslCompiledTransform();
@@ -43,11 +43,11 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 		}
 
 		private class Extension: IDisposable {
-			private static readonly Regex rxAliasToName = new Regex(@"^\p{Lu}{2,}|\p{L}(\p{Ll}|[0-9_])*", RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.ExplicitCapture);
-			private static readonly Regex rxMarks = new Regex(@"\p{M}+", RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.ExplicitCapture);
+			private static readonly Regex rxAliasToName = new(@"^\p{Lu}{2,}|\p{L}(\p{Ll}|[0-9_])*", RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.ExplicitCapture);
+			private static readonly Regex rxMarks = new(@"\p{M}+", RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.ExplicitCapture);
 
-			private readonly Dictionary<string, string> aliasToName = new Dictionary<string, string>(StringComparer.InvariantCulture);
-			private readonly Dictionary<string, string> nameToAlias = new Dictionary<string, string>(StringComparer.InvariantCulture);
+			private readonly Dictionary<string, string> aliasToName = new(StringComparer.InvariantCulture);
+			private readonly Dictionary<string, string> nameToAlias = new(StringComparer.InvariantCulture);
 			private readonly CodeDomProvider codeDomProvider;
 
 			public Extension() {

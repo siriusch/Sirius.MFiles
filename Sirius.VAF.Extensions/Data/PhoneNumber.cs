@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using PhoneNumbers;
 
@@ -13,7 +9,7 @@ namespace Sirius.VAF.Data {
 		}
 
 		public PhoneNumber(string defaultRegion) {
-			this.DefaultRegion = defaultRegion;
+			DefaultRegion = defaultRegion;
 		}
 
 		public bool CheckAndNormalize(string nr, out string formattedNr, out string message) {
