@@ -566,7 +566,7 @@ namespace Sirius.XML {
 
 		[Theory]
 		[InlineData("abc")]
-		[InlineData("2")]
+		[InlineData("-1")]
 		public void Enum_Parse_Error(string value) {
 			Output.WriteLine(Assert.ThrowsAny<Exception>(() => ElementAttribute<AttributeTargets>.Parse(value)).Message);
 		}

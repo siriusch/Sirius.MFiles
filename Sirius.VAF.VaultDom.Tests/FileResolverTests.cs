@@ -22,7 +22,7 @@ namespace Sirius.VAF.VaultDom {
 			Output = output;
 		}
 
-		[Fact]
+		[Fact(Skip = "No folder exists for running the test")]
 		public void ResolveEntity() {
 			var fileResolver = new FileResolver(@"C:\hg\VafCommune\Vault");
 			var result = (Stream)fileResolver.GetEntity(new Uri("Index.xml", UriKind.Relative), null, typeof(Stream));

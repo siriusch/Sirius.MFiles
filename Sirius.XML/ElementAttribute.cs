@@ -53,7 +53,13 @@ namespace Sirius.XML {
 			}
 			// Convert enums with their name
 			if (typeof(T).IsEnum) {
-				Parse = str => (T)Enum.Parse(typeof(T), str);
+				Parse = str => {
+					var result = (T)Enum.Parse(typeof(T), str);
+					if (!Enum.IsDefined(typeof(T), result)) {
+						throw new ArgumentException("'"+str+"' is not a valid "+typeof(T).Name+" value", nameof(str));
+					}
+					return result;
+				};
 				Stringify = value => value.ToString();
 				return;
 			}
