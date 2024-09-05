@@ -62,6 +62,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sirius.VAF.VaultDom\Sirius.VAF.VaultDom.csproj">
+      <Project>{672F7839-06B4-4212-A932-0015D1BBF9EE}</Project>
+      <Name>Sirius.VAF.VaultDom</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sirius.XML\Sirius.XML.csproj">
       <Project>{F52F36C0-F387-4B78-B575-C88B2B9AED8E}</Project>
       <Name>Sirius.XML</Name>

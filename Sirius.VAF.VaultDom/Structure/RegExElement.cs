@@ -3,12 +3,12 @@
 using Sirius.XML;
 
 namespace Sirius.VAF.VaultDom.Structure {
-	public class RegEx: XElement {
+	public class RegExElement: XElement {
 		public static readonly XName ElementName = "regex";
 
-		public RegEx(): base(ElementName) { }
+		public RegExElement(): base(ElementName) { }
 
-		public RegEx(XElement node): base(node) { }
+		public RegExElement(XElement node): base(node) { }
 
 		public string Pattern {
 			get => ElementAttribute<string>.Get(this, "pattern");

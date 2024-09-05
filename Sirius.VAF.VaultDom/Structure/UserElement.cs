@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using Sirius.XML;
 
 namespace Sirius.VAF.VaultDom.Structure {
-	public class UserElement: XElement {
+	public class UserElement: XElement, IElementWithAcl {
 		public static readonly XName ElementName = "user";
 		private static readonly XName DeletedName = "deleted";
 		private static readonly XName FullName = "full";

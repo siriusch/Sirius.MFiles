@@ -14,7 +14,7 @@
 	<xsl:param name="viewprefix">VW.</xsl:param>
 	<xsl:param name="ownerpropertydefprefix">PD.Owner.</xsl:param>
 
-	<xsl:key name="objtype" match="/structure/objtypes/objtype" use="number(@id)" />
+	<xsl:key name="objtype" match="/archive/structure/objtypes/objtype" use="number(@id)" />
 
 	<xsl:template name="AliasFile">
 		<xsl:text xml:space="preserve">using System;
@@ -234,7 +234,11 @@ namespace </xsl:text>
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="/structure">
+	<xsl:template match="/archive">
+		<xsl:apply-templates select="structure" />  
+	</xsl:template>
+	
+	<xsl:template match="/archive/structure">
 		<xsl:choose>
 			<xsl:when test="$kind='AliasFile'">
 				<xsl:call-template name="AliasFile" />

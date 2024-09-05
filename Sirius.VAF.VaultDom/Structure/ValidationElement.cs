@@ -17,9 +17,9 @@ namespace Sirius.VAF.VaultDom.Structure {
 			set => this.SetElement(StringName, value);
 		}
 
-		public RegEx RegEx {
-			get => (RegEx)Element(RegExElement.ElementName);
-			set => this.SetElement(RegExElement.ElementName, value);
+		public RegExElement RegEx {
+			get => (RegExElement)Element(Validations.RegExElement.ElementName);
+			set => this.SetElement(Validations.RegExElement.ElementName, value);
 		}
 
 		public VBScriptElement VBScript {

@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<package>
+  <metadata>
+    <id>Sirius.XML</id>
+    <version>1.0.0</version>
+    <authors>avonwyss</authors>
+    <owners>avonwyss</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/siriusch/Sirius.MFiles</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extensions to XML functionality of .NET</description>
+    <copyright>Copyright 2024 Sirius Technologies AG</copyright>
+    <tags>XML Linq-to-XML</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$Configuration$\Sirius.XML.*" target="lib" />
+  </files>
+</package>

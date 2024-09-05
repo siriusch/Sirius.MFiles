@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using Sirius.XML;
 
 namespace Sirius.VAF.VaultDom.Structure {
-	public class ClassElement: DefinitionElementBase {
+	public class ClassElement: DefinitionElementBase, IElementWithAcl {
 		public static readonly XName ElementName = "class";
 		internal static readonly XName AssociatedPropertiesName = "associatedproperties";
 		private static readonly XName BuiltinName = "builtin";

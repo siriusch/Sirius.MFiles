@@ -23,9 +23,9 @@ namespace Sirius.VAF.VaultDom.Prologue {
 			set => ElementAttribute<NamedAclType>.Set(this, TypeName, value);
 		}
 
-		public string Aliases {
-			get => ElementAttribute<string>.Get(this, AliasesName);
-			set => ElementAttribute<string>.Set(this, AliasesName, value);
+		public AliasString Aliases {
+			get => ElementAttribute<AliasString>.Get(this, AliasesName, AliasString.Parse);
+			set => ElementAttribute<AliasString>.Set(this, AliasesName, value, AliasString.Stringify);
 		}
 
 		public Guid Guid {

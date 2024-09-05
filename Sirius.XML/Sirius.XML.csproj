@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Sirius.XML.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionElement.cs" />

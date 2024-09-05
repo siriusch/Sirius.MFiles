@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Xml;
 using System.Xml.Linq;
 
 using Sirius.VAF.VaultDom.Content;
@@ -123,7 +125,7 @@ namespace Sirius.VAF.VaultDom.Archive {
 			result.RegisterElement<PropertyValueExprElement, DfCallElement>(DfCallElement.ElementName);
 			result.RegisterElement<TypedValueExprElement, DfCallElement>(DfCallElement.ElementName);
 			result.RegisterElement<StatusValueExprElement, DfCallElement>(DfCallElement.ElementName);
-			result.RegisterElement<ValidationElement, RegExElement>(RegExElement.ElementName);
+			result.RegisterElement<ValidationElement, Structure.Validations.RegExElement>(Structure.Validations.RegExElement.ElementName);
 			result.RegisterElement<ValidationElement, Structure.Validations.VBScriptElement>(Structure.Validations.VBScriptElement.ElementName);
 			result.RegisterElement<CollectionElement<NamedAclElement>, NamedAclElement>(NamedAclElement.ElementName);
 			result.RegisterElement<NamedAclElement, AclForNaclElement>(AclForNaclElement.ElementName);
@@ -240,6 +242,18 @@ namespace Sirius.VAF.VaultDom.Archive {
 			result.RegisterElement<VlItemElement, AclReferenceElement>(AclReferenceElement.ElementName);
 			result.RegisterElement<VlItemElement, OriginalIdentityElement>(OriginalIdentityElement.ElementName);
 			return result;
+		}
+
+		public static ArchiveDocument Load(XmlResolver resolver, string name = "Index.xml") {
+			var indexFile = (Stream)resolver.GetEntity(new Uri("Index.xml", UriKind.Relative), null, typeof(Stream));
+			if (indexFile == null) {
+				throw new FileNotFoundException("File not found", name);
+			}
+			using var reader = XmlReader.Create(indexFile, new XmlReaderSettings() {
+					XmlResolver = resolver,
+					DtdProcessing = DtdProcessing.Parse
+			});
+			return new ArchiveDocument(Load(reader).Root);
 		}
 
 		public ArchiveDocument(object content) {

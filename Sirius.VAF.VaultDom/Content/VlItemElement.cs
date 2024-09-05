@@ -6,7 +6,7 @@ using Sirius.VAF.VaultDom.Structure;
 using Sirius.XML;
 
 namespace Sirius.VAF.VaultDom.Content {
-	public class VlItemElement: XElement {
+	public class VlItemElement: XElement, IElementWithAcl {
 		public static readonly XName ElementName = "vlitem";
 		private static readonly XName ChangedAtName = "changedat";
 		private static readonly XName DeletedName = "deleted";

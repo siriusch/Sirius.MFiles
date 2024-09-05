@@ -11,6 +11,8 @@ using System.Xml.XPath;
 using System.Xml.Xsl;
 
 using Sirius.MFiles.VafUtil.Options;
+using Sirius.VAF.VaultDom;
+using Sirius.VAF.VaultDom.Archive;
 
 namespace Sirius.MFiles.VafUtil.Verbs {
 	internal class GenerateVerb {
@@ -103,7 +105,7 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 		}
 
 		public static void Execute(GenerateOptions opts) {
-			var structureXml = XDocument.Load(Path.Combine(opts.ConfigFolder, @"Metadata\Structure.xml"));
+			var archive = ArchiveDocument.Load(new FileResolver(opts.ConfigFolder));
 			using (var output = File.Open(opts.Output, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read)) {
 				DetectNamespace(opts, output);
 				using (var extension = new Extension()) {
@@ -115,7 +117,7 @@ namespace Sirius.MFiles.VafUtil.Verbs {
 					args.AddParam("verbose", "", opts.Verbose);
 					args.XsltMessageEncountered += (_, a) => Console.WriteLine(a.Message);
 					using (var writer = new StreamWriter(output, Encoding.UTF8, 1024, true)) {
-						LoadEmbeddedTransform("StructureToCs.xslt").Transform(structureXml.CreateNavigator(), args, writer);
+						LoadEmbeddedTransform("StructureToCs.xslt").Transform(archive.CreateNavigator(), args, writer);
 					}
 				}
 				output.SetLength(output.Position);

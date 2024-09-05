@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using Sirius.XML;
 
 namespace Sirius.VAF.VaultDom.Structure {
-	public class WorkflowElement: DefinitionElementBase {
+	public class WorkflowElement: DefinitionElementBase, IElementWithAcl {
 		public static readonly XName ElementName = "workflow.2";
 		private static readonly XName DeletedName = "deleted";
 		private static readonly XName FullName = "full";

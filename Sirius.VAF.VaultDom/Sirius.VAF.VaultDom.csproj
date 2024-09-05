@@ -58,9 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Sirius.VAF.VaultDom.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivableElementBase.cs" />
+    <Compile Include="AliasString.cs" />
     <Compile Include="Archive\ArchiveDocument.cs" />
     <Compile Include="Archive\ArchiveElement.cs" />
     <Compile Include="Archive\ArchiveFlagsElement.cs" />
@@ -75,10 +77,12 @@
     <Compile Include="Content\OriginalIdentityElement.cs" />
     <Compile Include="Content\ParentReferenceElement.cs" />
     <Compile Include="Content\VlItemElement.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="FileResolver.cs" />
     <Compile Include="FlagsElementBase.cs" />
     <Compile Include="IActivable.cs" />
     <Compile Include="IElementInfoProvider.cs" />
+    <Compile Include="IElementWithAcl.cs" />
     <Compile Include="INotifyActiveChange.cs" />
     <Compile Include="Prologue\AceElement.cs" />
     <Compile Include="Prologue\AceRightElement.cs" />
@@ -200,7 +204,7 @@
     <Compile Include="Structure\PropertyDefUpdateType.cs" />
     <Compile Include="Structure\PropertyElement.cs" />
     <Compile Include="Structure\RecipientsElement.cs" />
-    <Compile Include="Structure\RegEx.cs" />
+    <Compile Include="Structure\RegExElement.cs" />
     <Compile Include="Structure\RelativeTimeElement.cs" />
     <Compile Include="Structure\RunScriptElement.cs" />
     <Compile Include="Structure\ScriptElement.cs" />

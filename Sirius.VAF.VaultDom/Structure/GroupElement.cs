@@ -5,7 +5,7 @@ using Sirius.VAF.VaultDom.Prologue;
 using Sirius.XML;
 
 namespace Sirius.VAF.VaultDom.Structure {
-	public class GroupElement: DefinitionElementBase {
+	public class GroupElement: DefinitionElementBase, IElementWithAcl {
 		public static readonly XName ElementName = "group";
 		private static readonly XName DeletedName = "deleted";
 		private static readonly XName ExternalNameName = "externalname";

@@ -3,7 +3,7 @@
 using Sirius.XML;
 
 namespace Sirius.VAF.VaultDom.Structure {
-	public class InOutElement: XElement {
+	public class InOutElement: XElement, IElementWithAcl {
 		public static readonly XName ElementName = "inout";
 		private static readonly XName CheckAccessName = "checkaccess";
 		private static readonly XName EditAccessRequiredName = "editaccessrequired";

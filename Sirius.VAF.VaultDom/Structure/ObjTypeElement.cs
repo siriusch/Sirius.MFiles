@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using Sirius.XML;
 
 namespace Sirius.VAF.VaultDom.Structure {
-	public class ObjTypeElement: DefinitionElementBase {
+	public class ObjTypeElement: DefinitionElementBase, IElementWithAcl {
 		public static readonly XName ElementName = "objtype";
 		internal static readonly XName AclForNewObjsName = "aclfornewobjs";
 		internal static readonly XName BrowsingTargetsName = "browsingtargets";

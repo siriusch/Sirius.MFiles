@@ -1,26 +1,21 @@
 <?xml version="1.0" ?>
 <package>
   <metadata>
-    <id>Sirius.VAF.Extensions</id>
+    <id>Sirius.VAF.VaultDom</id>
     <version>1.0.0</version>
     <authors>avonwyss</authors>
     <owners>avonwyss</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/siriusch/Sirius.MFiles</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>M-Files VAF additional extensions</description>
+    <description>M-Files Vault DOM for configuration export</description>
     <copyright>Copyright 2024 Sirius Technologies AG</copyright>
-    <tags>M-Files VAF</tags>
+    <tags>M-Files VAF Vault DOM</tags>
     <dependencies>
       <dependency id="Interop.MFilesAPI" version="21.2.9977" />
-      <dependency id="MFiles.VAF" version="23.6.687.1" />
-      <dependency id="MFiles.VAF.Extensions" version="23.3.1" />
-      <dependency id="OneOf" version="3.0.0" />
-      <dependency id="libphonenumber-csharp" version="8.13.0" />
-      <dependency id="postalcodes" version="2.1.*" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\$Configuration$\Sirius.VAF.Extensions.*" target="lib" />
+    <file src="bin\$Configuration$\Sirius.VAF.VaultDom.*" target="lib" />
   </files>
 </package>
