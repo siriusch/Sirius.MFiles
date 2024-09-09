@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Sirius.VAF.AspNetCore {
-	public class ObjVerExResult: ActionResult {
-		public Func<ObjectFile, bool> Filter {
+	public class ObjVerExFileResult: ActionResult {
+		public OneOf.OneOf<string, int, Func<ObjectFile, bool>> Filter {
 			get;
 		}
 
@@ -19,8 +19,8 @@ namespace Sirius.VAF.AspNetCore {
 			get;
 		}
 
-		public ObjVerExResult(ObjVerEx o, Func<ObjectFile, bool> filter) {
-			Filter = filter ?? (_ => true);
+		public ObjVerExFileResult(ObjVerEx o, OneOf.OneOf<string, int, Func<ObjectFile, bool>>? filter) {
+			Filter = filter ?? 0;
 			Object = o;
 		}
 
@@ -28,7 +28,7 @@ namespace Sirius.VAF.AspNetCore {
 			if (context == null) {
 				throw new ArgumentNullException(nameof(context));
 			}
-			var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<ObjVerExResult>>();
+			var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<ObjVerExFileResult>>();
 			return executor.ExecuteAsync(context, this);
 		}
 	}

@@ -22,7 +22,7 @@ namespace Sirius.VAF.AspNetCore {
 			that.TryAddTransient(sp => sp.GetService<IHttpContextAccessor>().HttpContext.GetEnv());
 			that.TryAddTransient(sp => sp.GetService<IHttpContextAccessor>().HttpContext.GetConfiguration<TConfiguration>());
 			that.TryAddSingleton<IActionResultExecutor<CalendarResult>, CalendarResultExecutor>();
-			that.TryAddSingleton<IActionResultExecutor<ObjVerExResult>, ObjVerExResultExecutor>();
+			that.TryAddSingleton<IActionResultExecutor<ObjVerExFileResult>, ObjVerExFileResultExecutor>();
 			return that;
 		}
 	}
