@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
+using OneOf;
+
 namespace Sirius.VAF.AspNetCore {
 	public class ObjVerExFileResult: ActionResult {
-		public OneOf.OneOf<string, int, Func<ObjectFile, bool>> Filter {
+		public OneOf.OneOf<string, int, Func<ObjectFile, bool>> FileSpec {
 			get;
 		}
 
@@ -19,8 +21,16 @@ namespace Sirius.VAF.AspNetCore {
 			get;
 		}
 
-		public ObjVerExFileResult(ObjVerEx o, OneOf.OneOf<string, int, Func<ObjectFile, bool>>? filter) {
-			Filter = filter ?? 0;
+		public ObjVerExFileResult(ObjVerEx o): this(o, OneOf<string, int, Func<ObjectFile, bool>>.FromT1(0)) { }
+		
+		public ObjVerExFileResult(ObjVerEx o, string fileName): this(o, OneOf<string, int, Func<ObjectFile, bool>>.FromT0(fileName)) { }
+		
+		public ObjVerExFileResult(ObjVerEx o, int index): this(o, OneOf<string, int, Func<ObjectFile, bool>>.FromT1(index)) { }
+
+		public ObjVerExFileResult(ObjVerEx o, Func<ObjectFile, bool> filter): this(o, OneOf<string, int, Func<ObjectFile, bool>>.FromT2(filter)) { }
+
+		private ObjVerExFileResult(ObjVerEx o, OneOf.OneOf<string, int, Func<ObjectFile, bool>> fileSpec) {
+			FileSpec = fileSpec;
 			Object = o;
 		}
 

@@ -15,8 +15,8 @@ namespace Sirius.VAF.AspNetCore {
 			var response = context.HttpContext.Response;
 			var vault = result.Object.Vault;
 			var files = vault.ObjectFileOperations.GetFiles(result.Object.ObjVer);
-			var file = result.Filter.Match(
-					filename => files.GetObjectFileByNameForFileSystem(filename), 
+			var file = result.FileSpec.Match(
+					fileName => files.GetObjectFileByNameForFileSystem(fileName), 
 					index => index > 0 && index < files.Count ? files[index] : null, 
 					filter => files.Cast<ObjectFile>().SingleOrDefault(filter));
 			if (file == null) {
