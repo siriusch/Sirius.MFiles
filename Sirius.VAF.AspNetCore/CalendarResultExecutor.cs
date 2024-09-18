@@ -11,7 +11,7 @@ namespace Sirius.VAF.AspNetCore {
 		public Task ExecuteAsync(ActionContext context, CalendarResult result) {
 			var response = context.HttpContext.Response;
 			response.StatusCode = 200;
-			response.Headers.Add("Content-Type","text/calendar; encoding=utf-8");
+			response.Headers.Add("Content-Type","text/calendar; charset=utf-8");
 			new CalendarSerializer().Serialize(result.Calendar, response.Body, Encoding.UTF8);
 			return Task.CompletedTask;
 		}
