@@ -146,6 +146,7 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="LookupComparer.cs" />
     <Compile Include="LookupsExtensions.cs" />
+    <Compile Include="MFIdentifierExtensions.cs" />
     <Compile Include="MFSearchBuilderExtensions.cs" />
     <Compile Include="MFStringBuilder.cs" />
     <Compile Include="MFStringBuilderExtensions.cs" />

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+using MFiles.VAF.Common;
+using MFiles.VAF.Configuration;
+
 namespace Sirius.VAF {
 	public static class EnumerableExtensions {
 		public delegate bool TryFunc<in TIn, TOut>(TIn value, out TOut result);
@@ -60,6 +63,18 @@ namespace Sirius.VAF {
 						yield return result;
 					}
 				}
+			}
+		}
+
+		public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> that, IEqualityComparer<TKey> comparer = null) {
+			var result = new Dictionary<TKey, TValue>(comparer);
+			result.AddRange(that);
+			return result;
+		}
+
+		public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> that, IEnumerable<KeyValuePair<TKey, TValue>> values) {
+			foreach (var pair in values) {
+				that.Add(pair.Key, pair.Value);
 			}
 		}
 	}
