@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using JetBrains.Annotations;
 
@@ -34,12 +35,16 @@ namespace Sirius.VAF {
 			}
 		}
 
-		public static void SavePropertiesIfDifferent([NotNull] this ObjVerEx that, [NotNull] PropertyValues properties) {
+		public static void SavePropertiesIfDifferent([NotNull] this ObjVerEx that, [NotNull] PropertyValues properties, params MFIdentifier[] propertiesToIgnore) {
 			if (properties == null) {
 				throw new ArgumentNullException(nameof(properties));
 			}
+			var propertyDefsToIgnore = new HashSet<int>((propertiesToIgnore ?? Array.Empty<MFIdentifier>()).Select(p => p.ID));
 			var isDifferent = false;
 			foreach (PropertyValue newProperty in properties) {
+				if (propertyDefsToIgnore.Contains(newProperty.PropertyDef)) {
+					continue;
+				}
 				if (!that.TryGetProperty(newProperty.PropertyDef, out var oldProperty)) {
 					// We found a new property
 					if (newProperty.Value.IsNULL() || newProperty.Value.IsUninitialized()) {
