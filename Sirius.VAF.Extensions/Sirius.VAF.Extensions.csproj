@@ -145,6 +145,8 @@
     <Compile Include="Data\SwissUid.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="LookupComparer.cs" />
+    <Compile Include="LookupEqualityComparer.cs" />
+    <Compile Include="LookupExtensions.cs" />
     <Compile Include="LookupsExtensions.cs" />
     <Compile Include="MFIdentifierExtensions.cs" />
     <Compile Include="MFSearchBuilderExtensions.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="MFStringBuilderExtensions.cs" />
     <Compile Include="ObjectVersionAndPropertiesExtensions.cs" />
     <Compile Include="ObjVerExExtensions.cs" />
+    <Compile Include="ObjVerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyEnvironmentExtensions.cs" />
     <Compile Include="PropertyValueExtensions.cs" />

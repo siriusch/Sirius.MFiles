@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using JetBrains.Annotations;
+
 using MFiles.VAF.Common;
 using MFiles.VAF.Configuration;
 using MFiles.VAF.Extensions;
@@ -9,10 +11,36 @@ using MFilesAPI;
 
 namespace Sirius.VAF {
 	public static class ObjVerExExtensions {
-		public static void SavePropertiesIfDifferent(this ObjVerEx objVer, PropertyValues properties) {
+		public static void SavePropertyIfDifferent([NotNull] this ObjVerEx that, [NotNull] MFIdentifier propertyDef, MFDataType dataType, [CanBeNull] object value) {
+			if (propertyDef == null) {
+				throw new ArgumentNullException(nameof(propertyDef));
+			}
+			var existing = that.GetProperty(propertyDef);
+			var typedValue = new TypedValue();
+			typedValue.SetValueEx(dataType, value);
+			if (existing?.TypedValue.IsEqual(typedValue, EqualityCompareOptions.TextCaseSensitive) != true) {
+				that.SaveProperty(propertyDef, typedValue.DataType, typedValue.Value);
+			}
+		}
+
+		public static void SavePropertyIfDifferent([NotNull] this ObjVerEx that, [NotNull] PropertyValue propertyValue) {
+			if (propertyValue == null) {
+				throw new ArgumentNullException(nameof(propertyValue));
+			}
+			var existing = that.GetProperty(propertyValue.PropertyDef);
+			var typedValue = propertyValue.TypedValue;
+			if (existing?.TypedValue.IsEqual(typedValue, EqualityCompareOptions.TextCaseSensitive) != true) {
+				that.SaveProperty(propertyValue.PropertyDef, typedValue.DataType, typedValue.Value);
+			}
+		}
+
+		public static void SavePropertiesIfDifferent([NotNull] this ObjVerEx that, [NotNull] PropertyValues properties) {
+			if (properties == null) {
+				throw new ArgumentNullException(nameof(properties));
+			}
 			var isDifferent = false;
 			foreach (PropertyValue newProperty in properties) {
-				if (!objVer.TryGetProperty(newProperty.PropertyDef, out var oldProperty)) {
+				if (!that.TryGetProperty(newProperty.PropertyDef, out var oldProperty)) {
 					// We found a new property
 					if (newProperty.Value.IsNULL() || newProperty.Value.IsUninitialized()) {
 						// But it is nothing, so move along
@@ -25,57 +53,26 @@ namespace Sirius.VAF {
 					// Both empty, next property
 					continue;
 				}
-				switch (oldProperty.Value.DataType) {
-				case MFDataType.MFDatatypeLookup:
-					var oldLookup = oldProperty.Value.GetValueAsLookup();
-					var newLookup = newProperty.Value.GetValueAsLookup();
-					if (!LookupComparer.Default.Equals(oldLookup, newLookup)) {
-						isDifferent = true;
-					}
-					break;
-				case MFDataType.MFDatatypeMultiSelectLookup:
-					var oldMultiSelectLookup = oldProperty.Value.GetValueAsLookups();
-					var newMultiSelectLookup = newProperty.Value.GetValueAsLookups();
-					if (!LookupComparer.Default.Equals(oldMultiSelectLookup, newMultiSelectLookup)) {
-						isDifferent = true;
-						break;
-					}
-					break;
-				case MFDataType.MFDatatypeText:
-				case MFDataType.MFDatatypeMultiLineText:
-					var oldText = (string)oldProperty.Value.Value;
-					var newText = (string)newProperty.Value.Value;
-					if (!string.Equals(oldText, newText, StringComparison.InvariantCulture)) {
-						isDifferent = true;
-					}
-					break;
-				default:
-					var oldValue = oldProperty.Value.Value;
-					var newValue = newProperty.Value.Value;
-					if (!Equals(oldValue, newValue)) {
-						isDifferent = true;
-					}
-					break;
-				}
-				if (isDifferent) {
+				if (!oldProperty.TypedValue.IsEqual(newProperty.TypedValue, EqualityCompareOptions.TextCaseSensitive)) {
+					isDifferent = true;
 					break;
 				}
 			}
 			// If any property was different, save the changes to the ObjVerEx object
 			if (isDifferent) {
-				objVer.SaveProperties(properties);
+				that.SaveProperties(properties);
 			}
 		}
 
-		public static ObjectFiles GetFiles(this ObjVerEx that) {
+		public static ObjectFiles GetFiles([NotNull] this ObjVerEx that) {
 			return that.Vault.ObjectFileOperations.GetFiles(that.ObjVer);
 		}
 
-		public static ObjectFile GetSingleFile(this ObjVerEx that) {
+		public static ObjectFile GetSingleFile([NotNull] this ObjVerEx that) {
 			return that.Vault.ObjectFileOperations.GetFiles(that.ObjVer)[1];
 		}
 
-		public static IReadOnlyCollection<int> GetClasses(this ObjVerEx that) {
+		public static IReadOnlyCollection<int> GetClasses([NotNull] this ObjVerEx that) {
 			var result = new HashSet<int>() {
 					that.Class
 			};
@@ -138,6 +135,26 @@ namespace Sirius.VAF {
 			return that.TryGetPropertyWithValue(property, out var propVal)
 					? propVal.GetValueAsLocalizedTextEx(allowDigitGrouping)
 					: defaultText;
+		}
+
+		public static Lookup ToSpecificVersionLookup(this ObjVerEx that) {
+			return new Lookup() {
+					ObjectType = that.Type,
+					Item = that.ID,
+					Version = that.Version
+			};
+		}
+
+		public static Lookup ToLatestVersionLookup(this ObjVerEx that) {
+			return new Lookup() {
+					ObjectType = that.Type,
+					Item = that.ID,
+					Version = -1
+			};
+		}
+
+		public static string GetUid(this ObjVerEx that) {
+			return that.Info.ObjectGUID.Trim('{', '}');
 		}
 	}
 }

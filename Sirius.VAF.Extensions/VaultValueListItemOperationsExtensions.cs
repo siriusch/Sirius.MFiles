@@ -15,7 +15,7 @@ namespace Sirius.VAF {
 			var condition = new SearchCondition();
 			condition.Expression.SetValueListItemExpression(MFValueListItemPropertyDef.MFValueListItemPropertyDefName, MFParentChildBehavior.MFParentChildBehaviorNone);
 			condition.ConditionType = MFConditionType.MFConditionTypeEqual;
-			condition.TypedValue.SetValue(MFDataType.MFDatatypeText, value);
+			condition.TypedValue.SetValueEx(MFDataType.MFDatatypeText, value);
 			var result = that.SearchForValueListItems(valueList, new SearchConditions() { { -1, condition } });
 			if (result.Count == 1) {
 				item = result[1];

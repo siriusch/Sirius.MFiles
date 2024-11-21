@@ -114,23 +114,23 @@ namespace Sirius.VAF {
 		}
 
 		public static void SetValue(this PropertyValues that, MFIdentifier property, bool? value) {
-			GetOrAdd(that, property).Value.SetValueOrNULL(MFDataType.MFDatatypeBoolean, value);
+			GetOrAdd(that, property).Value.SetValueEx(MFDataType.MFDatatypeBoolean, value);
 		}
 
 		public static void SetValue(this PropertyValues that, MFIdentifier property, int? value) {
-			GetOrAdd(that, property).Value.SetValueOrNULL(MFDataType.MFDatatypeInteger, value);
+			GetOrAdd(that, property).Value.SetValueEx(MFDataType.MFDatatypeInteger, value);
 		}
 
 		public static void SetValue(this PropertyValues that, MFIdentifier property, long? value) {
-			GetOrAdd(that, property).Value.SetValueOrNULL(MFDataType.MFDatatypeInteger64, value);
+			GetOrAdd(that, property).Value.SetValueEx(MFDataType.MFDatatypeInteger64, value);
 		}
 
 		public static void SetValue(this PropertyValues that, MFIdentifier property, double? value) {
-			GetOrAdd(that, property).Value.SetValueOrNULL(MFDataType.MFDatatypeFloating, value);
+			GetOrAdd(that, property).Value.SetValueEx(MFDataType.MFDatatypeFloating, value);
 		}
 
 		public static void SetValue(this PropertyValues that, MFIdentifier property, DateTime? value) {
-			GetOrAdd(that, property).Value.SetValueOrNULL(MFDataType.MFDatatypeDate, value);
+			GetOrAdd(that, property).Value.SetValueEx(MFDataType.MFDatatypeDate, value);
 		}
 
 		public static void SetValue(this PropertyValues that, MFIdentifier property, TypedValue value) {
@@ -138,7 +138,7 @@ namespace Sirius.VAF {
 		}
 
 		public static void SetValue(this PropertyValues that, MFIdentifier property, string value, bool multiLine = false) {
-			GetOrAdd(that, property).Value.SetValueOrNULL(multiLine ? MFDataType.MFDatatypeMultiLineText : MFDataType.MFDatatypeText, value);
+			GetOrAdd(that, property).Value.SetValueEx(multiLine ? MFDataType.MFDatatypeMultiLineText : MFDataType.MFDatatypeText, value);
 		}
 
 		public static void SetValue(this PropertyValues that, MFIdentifier property, MFIdentifier value, bool multi = false) {
@@ -187,7 +187,7 @@ namespace Sirius.VAF {
 			if (multi) {
 				SetValue(that, property, value == null ? Enumerable.Empty<Lookup>() : new[] { value });
 			} else {
-				GetOrAdd(that, property).Value.SetValueOrNULL(MFDataType.MFDatatypeLookup, value);
+				GetOrAdd(that, property).Value.SetValueEx(MFDataType.MFDatatypeLookup, value);
 			}
 		}
 
