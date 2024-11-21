@@ -49,7 +49,7 @@ namespace Sirius.VAF {
 					isDifferent = true;
 					break;
 				}
-				if ((oldProperty.Value.IsNULL() || oldProperty.Value.IsUninitialized()) == (newProperty.Value.IsNULL() || newProperty.Value.IsUninitialized())) {
+				if ((oldProperty.Value.IsNULL() || oldProperty.Value.IsUninitialized()) && (newProperty.Value.IsNULL() || newProperty.Value.IsUninitialized())) {
 					// Both empty, next property
 					continue;
 				}
