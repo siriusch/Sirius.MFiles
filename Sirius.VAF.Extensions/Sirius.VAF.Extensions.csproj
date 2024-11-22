@@ -152,6 +152,7 @@
     <Compile Include="MFSearchBuilderExtensions.cs" />
     <Compile Include="MFStringBuilder.cs" />
     <Compile Include="MFStringBuilderExtensions.cs" />
+    <Compile Include="ObjectFileExtensions.cs" />
     <Compile Include="ObjectVersionAndPropertiesExtensions.cs" />
     <Compile Include="ObjVerExExtensions.cs" />
     <Compile Include="ObjVerExtensions.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="PropertyEnvironmentExtensions.cs" />
     <Compile Include="PropertyValueExtensions.cs" />
     <Compile Include="PropertyValuesExtensions.cs" />
+    <Compile Include="SeekableStream.cs" />
     <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Strings.Designer.cs">
