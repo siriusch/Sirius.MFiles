@@ -26,11 +26,12 @@ namespace Sirius.VAF {
 
 		public SeekableStream([NotNull] Stream underlyingStream, Mode mode): base() {
 			this.underlyingStream = underlyingStream ?? throw new ArgumentNullException(nameof(underlyingStream));
-			this.mode = mode;
+			this.mode = Mode.WriteNoFlush; // for the initial CopyTo we need to be writeable
 			if (mode == Mode.Read) {
 				this.underlyingStream.CopyTo(this);
 				Seek(0, SeekOrigin.Begin);
 			}
+			this.mode = mode;
 		}
 
 		public override bool CanWrite => !disposed && mode != Mode.Read;
