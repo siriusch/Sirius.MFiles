@@ -98,7 +98,7 @@ namespace Sirius.VAF {
 			Debug.Assert(length <= Length);
 			var buffer = base.GetBuffer();
 			do {
-				var bytesRead = underlyingStream.Read(buffer, bytesProcessed, ChunkSize);
+				var bytesRead = underlyingStream.Read(buffer, bytesProcessed, Math.Min(ChunkSize, buffer.Length-bytesProcessed));
 				if (bytesRead == 0) {
 					throw new InvalidOperationException("Unexpected end of underlying stream");
 				}
