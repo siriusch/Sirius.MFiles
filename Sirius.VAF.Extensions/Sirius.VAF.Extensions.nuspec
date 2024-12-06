@@ -12,10 +12,10 @@
     <copyright>Copyright 2024 Sirius Technologies AG</copyright>
     <tags>M-Files VAF</tags>
     <dependencies>
-      <dependency id="Interop.MFilesAPI" version="[21,*]" />
-      <dependency id="MFiles.VAF" version="[23,*]" />
-      <dependency id="MFiles.VAF.Extensions" version="[23,*]" />
-      <dependency id="OneOf" version="[3,*]" />
+      <dependency id="Interop.MFilesAPI" version="[21,]" />
+      <dependency id="MFiles.VAF" version="[23,]" />
+      <dependency id="MFiles.VAF.Extensions" version="[23,]" />
+      <dependency id="OneOf" version="[3,]" />
       <dependency id="libphonenumber-csharp" version="*" />
       <dependency id="postalcodes" version="2.*" />
       <dependency id="ZXing.Net" version="*" />
