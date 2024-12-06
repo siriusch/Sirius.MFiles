@@ -13,16 +13,16 @@
     <tags>M-Files VAF</tags>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="bsn.Har" version="[1.24.9.9," />
-        <dependency id="bsn.Har.AspNetCore.Server" version="[1.24.9.9," />
-        <dependency id="Interop.MFilesAPI" version="[21," />
-        <dependency id="MFiles.VAF" version="[23," />
-        <dependency id="MFilesAPI.Extensions" version="[23," />
+        <dependency id="bsn.Har" version="[1.24.9.9,*]" />
+        <dependency id="bsn.Har.AspNetCore.Server" version="[1.24.9.9,*]" />
+        <dependency id="Interop.MFilesAPI" version="[21,*]" />
+        <dependency id="MFiles.VAF" version="[23,*]" />
+        <dependency id="MFilesAPI.Extensions" version="[23,*]" />
         <dependency id="Microsoft.AspNetCore.Mvc.Core" version="2.*" />
         <dependency id="Microsoft.AspNetCore.Hosting" version="2.*" />
         <dependency id="Microsoft.AspNetCore.StaticFiles" version="2.*" />
-        <dependency id="Ical.Net" version="[4," />
-        <dependency id="Newtonsoft.Json" version="[10," />
+        <dependency id="Ical.Net" version="[4,*]" />
+        <dependency id="Newtonsoft.Json" version="[10,*]" />
       </group>
     </dependencies>
   </metadata>
