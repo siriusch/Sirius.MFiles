@@ -12,7 +12,7 @@
     <copyright>Copyright 2024 Sirius Technologies AG</copyright>
     <tags>M-Files VAF Vault DOM</tags>
     <dependencies>
-      <dependency id="Interop.MFilesAPI" version="21.2.9977" />
+      <dependency id="Interop.MFilesAPI" version="[21.*,]" />
     </dependencies>
   </metadata>
   <files>
