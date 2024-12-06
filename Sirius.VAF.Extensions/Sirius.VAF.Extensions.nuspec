@@ -12,12 +12,12 @@
     <copyright>Copyright 2024 Sirius Technologies AG</copyright>
     <tags>M-Files VAF</tags>
     <dependencies>
-      <dependency id="Interop.MFilesAPI" version="[21.*,]" />
-      <dependency id="MFiles.VAF" version="[23.*,]" />
-      <dependency id="MFiles.VAF.Extensions" version="[23.*,]" />
-      <dependency id="OneOf" version="[3.*,]" />
+      <dependency id="Interop.MFilesAPI" version="[21," />
+      <dependency id="MFiles.VAF" version="[23," />
+      <dependency id="MFiles.VAF.Extensions" version="[23," />
+      <dependency id="OneOf" version="[3," />
       <dependency id="libphonenumber-csharp" version="*" />
-      <dependency id="postalcodes" version="[2.1.*,3)" />
+      <dependency id="postalcodes" version="2.*" />
       <dependency id="ZXing.Net" version="*" />
       <dependency id="PdfiumViewer.Updated" version="[2.14.4,3)" />
       <dependency id="PdfiumViewer.Native.x86_64.no_v8-no_xfa" version="*" />
