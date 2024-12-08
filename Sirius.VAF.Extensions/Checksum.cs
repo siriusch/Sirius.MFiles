@@ -19,7 +19,7 @@ namespace Sirius.VAF {
 
 		public static int ComputeMod10Rec(string value) {
 			if (!Regex.IsMatch(value, "^[0-9]+$", RegexOptions.CultureInvariant)) {
-				throw new ArgumentException("Invalid data", nameof(value));
+				throw new ArgumentException(Strings.InvalidData, nameof(value));
 			}
 			return ComputeMod10RecInternal(value);
 		}
@@ -46,7 +46,7 @@ namespace Sirius.VAF {
 
 		public static int ComputeMod11(string value) {
 			if (!Regex.IsMatch(value, "^[0-9]{8}$", RegexOptions.CultureInvariant)) {
-				throw new ArgumentException("Invalid data", nameof(value));
+				throw new ArgumentException(Strings.InvalidData, nameof(value));
 			}
 			return ComputeMod11Internal(value);
 		}
@@ -70,11 +70,13 @@ namespace Sirius.VAF {
 		}
 
 		public static int ComputeMod97(string prefix, string value) {
+			// ReSharper disable once LocalizableElement
 			if (!Regex.IsMatch(prefix, @"^[A-Z0-9]{2}$")) {
-				throw new ArgumentException("Invalid data", nameof(prefix));
+				throw new ArgumentException(Strings.InvalidData, nameof(prefix));
 			}
+			// ReSharper disable once LocalizableElement
 			if (!Regex.IsMatch(value, @"^[A-Z0-9]*$")) {
-				throw new ArgumentException("Invalid data", nameof(value));
+				throw new ArgumentException(Strings.InvalidData, nameof(value));
 			}
 			return ComputeMod97Internal(prefix, value);
 		}
@@ -89,18 +91,21 @@ namespace Sirius.VAF {
 		}
 
 		public static bool CheckMod97(string value) {
+			// ReSharper disable once LocalizableElement
 			return Regex.IsMatch(value, @"^[A-Z0-9]{4,}$") &&
 			       ComputeMod97Internal(value.Substring(0, 2), value.Substring(4)) == int.Parse(value.Substring(2, 2), NumberStyles.Integer, CultureInfo.InvariantCulture);
 		}
 
 		public static int ComputeEan13(string value) {
+			// ReSharper disable once LocalizableElement
 			if (!Regex.IsMatch(value, @"^[0-9]{12}$")) {
-				throw new ArgumentException("Invalid data", nameof(value));
+				throw new ArgumentException(Strings.InvalidData, nameof(value));
 			}
 			return ComputeEan13Internal(value);
 		}
 
 		public static bool CheckEan13(string value) {
+			// ReSharper disable once LocalizableElement
 			return Regex.IsMatch(value, @"^[0-9]{13}$") &&
 			       ComputeEan13Internal(value.Substring(0, value.Length-1)) == value[value.Length-1].DigitToInt();
 		}

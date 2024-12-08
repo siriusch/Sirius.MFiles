@@ -30,25 +30,43 @@ namespace Sirius.VAF {
             => GetString("IbanInvalidFormat");
 
         /// <summary>
-        ///     The QRR invoice reference has an invalid checksum.
+        ///     Invalid data.
+        /// </summary>
+        public static string InvalidData
+            => GetString("InvalidData");
+
+        /// <summary>
+        ///     A QR-IBAN requires a QR invoice reference.
+        /// </summary>
+        public static string InvoiceReferenceQrIbanRequiresQrr
+            => GetString("InvoiceReferenceQrIbanRequiresQrr");
+
+        /// <summary>
+        ///     The QR invoice reference has an invalid checksum.
         /// </summary>
         public static string InvoiceReferenceQrrInvalidChecksum
             => GetString("InvoiceReferenceQrrInvalidChecksum");
 
         /// <summary>
-        ///     The QRR invoice reference has an invalid format.
+        ///     The QR invoice reference has an invalid format.
         /// </summary>
         public static string InvoiceReferenceQrrInvalidFormat
             => GetString("InvoiceReferenceQrrInvalidFormat");
 
         /// <summary>
-        ///     The SCOR invoice reference has an invalid checksum.
+        ///     A QR invoice reference requires a QR-IBAN.
+        /// </summary>
+        public static string InvoiceReferenceQrrRequiresQrIban
+            => GetString("InvoiceReferenceQrrRequiresQrIban");
+
+        /// <summary>
+        ///     The structured invoice reference has an invalid checksum.
         /// </summary>
         public static string InvoiceReferenceScorInvalidChecksum
             => GetString("InvoiceReferenceScorInvalidChecksum");
 
         /// <summary>
-        ///     The SCOR invoice reference has an invalid format.
+        ///     The structured invoice reference has an invalid format.
         /// </summary>
         public static string InvoiceReferenceScorInvalidFormat
             => GetString("InvoiceReferenceScorInvalidFormat");

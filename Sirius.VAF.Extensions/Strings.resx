@@ -123,17 +123,26 @@
   <data name="IbanInvalidFormat" xml:space="preserve">
     <value>The IBAN has an invalid format.</value>
   </data>
+  <data name="InvalidData" xml:space="preserve">
+    <value>Invalid data.</value>
+  </data>
+  <data name="InvoiceReferenceQrIbanRequiresQrr" xml:space="preserve">
+    <value>A QR-IBAN requires a QR invoice reference.</value>
+  </data>
   <data name="InvoiceReferenceQrrInvalidChecksum" xml:space="preserve">
-    <value>The QRR invoice reference has an invalid checksum.</value>
+    <value>The QR invoice reference has an invalid checksum.</value>
   </data>
   <data name="InvoiceReferenceQrrInvalidFormat" xml:space="preserve">
-    <value>The QRR invoice reference has an invalid format.</value>
+    <value>The QR invoice reference has an invalid format.</value>
+  </data>
+  <data name="InvoiceReferenceQrrRequiresQrIban" xml:space="preserve">
+    <value>A QR invoice reference requires a QR-IBAN.</value>
   </data>
   <data name="InvoiceReferenceScorInvalidChecksum" xml:space="preserve">
-    <value>The SCOR invoice reference has an invalid checksum.</value>
+    <value>The structured invoice reference has an invalid checksum.</value>
   </data>
   <data name="InvoiceReferenceScorInvalidFormat" xml:space="preserve">
-    <value>The SCOR invoice reference has an invalid format.</value>
+    <value>The structured invoice reference has an invalid format.</value>
   </data>
   <data name="OasiInvalidChecksum" xml:space="preserve">
     <value>The OASI number has an invalid checksum.</value>
