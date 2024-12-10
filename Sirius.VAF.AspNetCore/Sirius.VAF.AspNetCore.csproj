@@ -62,8 +62,8 @@
     <Reference Include="MFiles.VAF.Configuration.Interfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa007b370d17fe5e, processorArchitecture=MSIL">
       <HintPath>..\packages\MFiles.VAF.Configuration.24.2.8\lib\net472\MFiles.VAF.Configuration.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="MFilesAPI.Extensions, Version=23.3.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MFilesAPI.Extensions.23.3.2\lib\net472\MFilesAPI.Extensions.dll</HintPath>
+    <Reference Include="MFilesAPI.Extensions, Version=24.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MFilesAPI.Extensions.24.4.3\lib\netstandard2.0\MFilesAPI.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>

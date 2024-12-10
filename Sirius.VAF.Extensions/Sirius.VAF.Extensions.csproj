@@ -60,11 +60,11 @@
     <Reference Include="MFiles.VAF.Configuration.Logging.NLog, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa007b370d17fe5e, processorArchitecture=MSIL">
       <HintPath>..\packages\MFiles.VAF.Configuration.Logging.NLog.23.12.3\lib\net472\MFiles.VAF.Configuration.Logging.NLog.dll</HintPath>
     </Reference>
-    <Reference Include="MFiles.VAF.Extensions, Version=24.2.67.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MFiles.VAF.Extensions.24.2.67\lib\net472\MFiles.VAF.Extensions.dll</HintPath>
+    <Reference Include="MFiles.VAF.Extensions, Version=24.4.68.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MFiles.VAF.Extensions.24.4.68\lib\net472\MFiles.VAF.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="MFilesAPI.Extensions, Version=23.3.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MFilesAPI.Extensions.23.3.2\lib\net472\MFilesAPI.Extensions.dll</HintPath>
+    <Reference Include="MFilesAPI.Extensions, Version=24.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MFilesAPI.Extensions.24.4.3\lib\netstandard2.0\MFilesAPI.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
