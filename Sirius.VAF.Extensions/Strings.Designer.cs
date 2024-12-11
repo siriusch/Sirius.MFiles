@@ -153,6 +153,18 @@ namespace Sirius.VAF {
         public static string UidInvalidFormat
             => GetString("UidInvalidFormat");
 
+        /// <summary>
+        ///     No value '{value}' found in Value List {valueList}.
+        /// </summary>
+        public static string ValueListValueNotFound(string value, string valueList)
+            => string.Format(
+                GetString("ValueListValueNotFound", m => m.Value switch { 
+                    "value" => "0",
+                    "valueList" => "1",
+                    _ => m.Value
+                }),
+                value, valueList);
+
         private static string GetString(string name)
         {
             return _resourceManager.GetString(name)!;

@@ -29,7 +29,17 @@ namespace Sirius.VAF {
 			if (TryGetValueListItemByName(that, valueList, value, out var item)) {
 				return item;
 			}
-			throw new KeyNotFoundException($"No value '{value}' found in Value List {valueList.Alias ?? valueList.ID.ToString()}");
+			throw new KeyNotFoundException(Strings.ValueListValueNotFound(value, valueList.Alias ?? valueList.ID.ToString()));
+		}
+
+		public static ValueListItem GetOrAddValueListItemByName(this VaultValueListItemOperations that, MFIdentifier valueList, string value) {
+			if (string.IsNullOrEmpty(value)) {
+				throw new ArgumentNullException(nameof(value));
+			}
+			if (TryGetValueListItemByName(that, valueList, value, out var item)) {
+				return item;
+			}
+			return that.AddValueListItem(valueList, new ValueListItem() { Name = value });
 		}
 	}
 }

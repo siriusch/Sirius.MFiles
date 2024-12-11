@@ -180,4 +180,7 @@
   <data name="InvalidData" xml:space="preserve">
     <value>Données invalides.</value>
   </data>
+  <data name="ValueListValueNotFound" xml:space="preserve">
+    <value>La valeur '{value}' n'a pas été trouvé dans la liste de valeurs {valueList}.</value>
+  </data>
 </root>

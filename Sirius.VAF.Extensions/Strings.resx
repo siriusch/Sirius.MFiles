@@ -182,4 +182,8 @@
   <data name="UidInvalidFormat" xml:space="preserve">
     <value>The UID has an invalid format.</value>
   </data>
+  <data name="ValueListValueNotFound" xml:space="preserve">
+    <value>No value '{value}' found in Value List {valueList}.</value>
+    <comment>string string</comment>
+  </data>
 </root>
