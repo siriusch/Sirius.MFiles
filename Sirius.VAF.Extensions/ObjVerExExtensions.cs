@@ -12,6 +12,10 @@ using MFilesAPI;
 
 namespace Sirius.VAF {
 	public static class ObjVerExExtensions {
+		public static PropertyValueChange[] Changes(this ObjVerEx that) {
+			return new ObjVerChanges(that).Changed;
+		}
+
 		public static void SavePropertyIfDifferent([NotNull] this ObjVerEx that, [NotNull] MFIdentifier propertyDef, MFDataType dataType, [CanBeNull] object value) {
 			if (propertyDef == null) {
 				throw new ArgumentNullException(nameof(propertyDef));
@@ -143,7 +147,7 @@ namespace Sirius.VAF {
 		}
 
 		public static Lookup ToSpecificVersionLookup([NotNull] this ObjVerEx that) {
-			return new Lookup() {
+			return new() {
 					ObjectType = that.Type,
 					Item = that.ID,
 					Version = that.Version
@@ -151,7 +155,7 @@ namespace Sirius.VAF {
 		}
 
 		public static Lookup ToLatestVersionLookup([NotNull] this ObjVerEx that) {
-			return new Lookup() {
+			return new() {
 					ObjectType = that.Type,
 					Item = that.ID,
 					Version = -1
@@ -163,7 +167,11 @@ namespace Sirius.VAF {
 		}
 
 		public static bool HasAnyClass([NotNull] this ObjVerEx that, params MFIdentifier[] classes) {
-			return (classes != null) && classes.Any(that.HasClass);
+			return classes != null && classes.Any(that.HasClass);
+		}
+
+		public static bool IsInState([NotNull] this ObjVerEx that, params MFIdentifier[] states) {
+			return states != null && states.Any(s => that.State == s.ID);
 		}
 	}
 }

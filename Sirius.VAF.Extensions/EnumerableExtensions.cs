@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-
-using MFiles.VAF.Common;
-using MFiles.VAF.Configuration;
+using System.Linq;
 
 namespace Sirius.VAF {
 	public static class EnumerableExtensions {
@@ -76,6 +74,72 @@ namespace Sirius.VAF {
 			foreach (var pair in values) {
 				that.Add(pair.Key, pair.Value);
 			}
+		}
+
+		public static bool TrySingle<T>(this IEnumerable<T> that, out T item) {
+			using var enumerator = that.GetEnumerator();
+			if (enumerator.MoveNext()) {
+				item = enumerator.Current;
+				if (!enumerator.MoveNext()) {
+					return true;
+				}
+			}
+			item = default;
+			return false;
+		}
+
+		public static bool TrySingle<T>(this IEnumerable<T> that, Func<T, bool> predicate, out T item) {
+			return that.Where(predicate).TrySingle(out item);
+		}
+
+		public static bool TryFirst<T>(this IEnumerable<T> that, out T item) {
+			using var enumerator = that.GetEnumerator();
+			if (enumerator.MoveNext()) {
+				item = enumerator.Current;
+				return true;
+			}
+			item = default;
+			return false;
+		}
+
+		public static bool TryFirst<T>(this IEnumerable<T> that, Func<T, bool> predicate, out T item) {
+			return that.Where(predicate).TryFirst(out item);
+		}
+
+		public static bool TryLast<T>(this IEnumerable<T> that, out T item) {
+			if (that is IReadOnlyList<T> list) {
+				if (list.Count == 0) {
+					item = default;
+					return false;
+				}
+				item = list[list.Count-1];
+				return true;
+			}
+			using var enumerator = that.GetEnumerator();
+			if (!enumerator.MoveNext()) {
+				item = default;
+				return false;
+			}
+			do {
+				item = enumerator.Current;
+			} while (enumerator.MoveNext());
+			return true;
+		}
+
+		public static bool TryLast<T>(this IEnumerable<T> that, Func<T, bool> predicate, out T item) {
+			if (that is IReadOnlyList<T> list) {
+				T result;
+				for (var i = list.Count-1; i >= 0; i--) {
+					result = list[i];
+					if (predicate(result)) {
+						item = result;
+						return true;
+					}
+				}
+				item = default;
+				return false;
+			}
+			return that.Where(predicate).TryLast(out item);
 		}
 	}
 }

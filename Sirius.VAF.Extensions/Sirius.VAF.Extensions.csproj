@@ -116,6 +116,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -167,10 +168,13 @@
     <Compile Include="MFStringBuilderExtensions.cs" />
     <Compile Include="ObjectFileExtensions.cs" />
     <Compile Include="ObjectVersionAndPropertiesExtensions.cs" />
+    <Compile Include="ObjIDTaskDirective.cs" />
     <Compile Include="ObjVerExExtensions.cs" />
+    <Compile Include="ObjVerExTaskDirective.cs" />
     <Compile Include="ObjVerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyEnvironmentExtensions.cs" />
+    <Compile Include="PropertyValueChangeExtensions.cs" />
     <Compile Include="PropertyValueExtensions.cs" />
     <Compile Include="PropertyValuesExtensions.cs" />
     <Compile Include="SeekableStream.cs" />
@@ -181,6 +185,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.Designer.tt</DependentUpon>
     </Compile>
+    <Compile Include="TaskManagerExtensions.cs" />
     <Compile Include="TypedValueExtensions.cs" />
     <Compile Include="VaultUserGroupOperationsExtensions.cs" />
     <Compile Include="VaultUserOperationsExtensions.cs" />
